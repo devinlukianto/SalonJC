@@ -1,21 +1,21 @@
 <!doctype html>
 <html lang="{{ config('app.locale') }}">
-	<head>
-	    <meta charset="utf-8">
-	    <title>JC Salon - Home</title>
-	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	    <meta name="description" content="">
-	    <meta name="author" content="">
-	    
-	    <!-- Bootstrap -->
-	    <link href="{{URL::asset('css/bootstrap.css')}}" rel="stylesheet">
-	    <link href="{{URL::asset('css/bootstrap-responsive.css')}}" rel="stylesheet">
-	    <link href="{{URL::asset('css/style.css')}}" rel="stylesheet">
+    <head>
+        <meta charset="utf-8">
+        <title>JC Salon - Home</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        
+        <!-- Bootstrap -->
+        <link href="{{URL::asset('css/bootstrap.css')}}" rel="stylesheet">
+        <link href="{{URL::asset('css/bootstrap-responsive.css')}}" rel="stylesheet">
+        <link href="{{URL::asset('css/style.css')}}" rel="stylesheet">
 
-	    <!--Script-->
-	    <script src="http://code.jquery.com/jquery.js"></script>
-	    <script src="{{URL::asset('js/jquery.css')}}"></script>  
-	</head>
+        <!--Script-->
+        <script src="{{URL::asset('js/jquery.js')}}"></script>
+        <script src="{{URL::asset('js/bootstrap.min.js')}}"></script>  
+    </head>
     
 	@include('style')
 

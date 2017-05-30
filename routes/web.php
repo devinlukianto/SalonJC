@@ -37,8 +37,8 @@ Route::get('signinpage', function () {
     return view('home');
 })->name('signinpage');
 
-Route::get('registerpage', function () {
-    return view('home');
+Route::get('register', function () {
+    return view('register');
 })->name('registerpage');
 
 
