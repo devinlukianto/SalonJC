@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Input;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -44,3 +46,15 @@ Route::get('register', function () {
 
 //ROUTE UNTUK DETAIL PRODUK
 Route::get('produk/{id}', 'PageController@fetchproduct')->name('produk');
+
+//ROUTE UNTUK REGISTER
+Route::post('/register', function()
+{
+    $user = new \App\Models\User;
+    $user->id    = Input::get('id');
+    $user->email    = Input::get('email');
+    $user->password = Input::get('password');
+    $user->save();
+
+    return Redirect::to("home");
+})->name('registerproceed');

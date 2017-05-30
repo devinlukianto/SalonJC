@@ -33,42 +33,28 @@
             </div>
             <!-- /. PAGE TITLE-->
             <div class="row">
-                <form class="form-horizontal span12">
+                <form class="form-horizontal span12" method="POST" action="{{route('registerproceed')}}">
                     <div class="span12">
-                        <label class="control-label span5">Nama Lengkap: </label>
+                        <label class="control-label span5">User ID: </label>
                         <div class="span7">
-                            <input type="text" class="form-control span4" id="nama">
+                            <input type="text" class="form-control span4" name="id">
                         </div>
                     </div>
                     <br><br>
                     <div class="span12">
                         <label class="control-label span5">Alamat Email: </label>
                         <div class="span7">
-                            <input type="text" class="form-control span4" id="email">
+                            <input type="text" class="form-control span4" name="email">
                         </div>
                     </div>
                     <br><br>
                     <div class="span12">
                         <label class="control-label span5" >Password: </label>
                         <div class="span7">
-                            <input type="text" class="form-control span3" id="pass">
+                            <input type="text" class="form-control span3" name="password">
                         </div>
-                    </div>
-                    <br><br>
-                    <div class="span12">
-                        <label class="control-label span5">Alamat Lengkap: </label>
-                        <div class="span7">
-                            <input type="text" class="form-control span6" id="alamat">
-                        </div>
-                    </div>
-                    <br><br>
-                    <div class="span12">
-                        <label class="control-label span5">Nomor Telepon: </label>
-                        <div class="span7">
-                            <input type="text" class="form-control span3" id="telp">
-                            <br><br>
-                            <a href="signin.html" class="btn btnfontsize" type="button">REGISTER</a>
-                        </div>
+                        <input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
+                        <input class="btn btnfontsize" type="submit" value="Register">
                     </div>
                     <br><br>
                 </form>
