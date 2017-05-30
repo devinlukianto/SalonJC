@@ -17,92 +17,10 @@
 	    <script src="{{URL::asset('js/jquery.css')}}"></script>  
 	</head>
     
-	<!--STYLE OVERRIDE-->
-	<style>
-	    div, h1, h2, h3 {
-	        font-family: Perpetua, serif;
-	    }
-	    
-	    p {
-	        font-size: 20px;
-	    }
-	    
-	    #header-row {
-	        background-color: white;
-	    }
-	    
-	    .centeralign {
-	        text-align: center;
-	    }
-	    
-	    .navbaralign {
-	        margin-left: 14%;
-	        text-align: center;
-	    }
-	    
-	    .menufontsize {
-	        font-size: 22px;
-	    }
-	    
-	    .imgadjustcarousel {
-	        height: 100%;
-	        width: 100%; 
-	        object-fit: contain;
-	    }
-	    
-	    .imgadjustproduct {
-	        height: 175px;
-	        object-fit: scale-down;
-	    }
-	</style>
-    
+	@include('style')
+
 	<body>
-	    <!--HEADER ROW-->
-	    <div id="header-row">
-	        <div class="container">
-	            <div class="row centeralign">
-	                <!--LOGO-->
-	                <div class="span12"><a class="brand" href="index.html"><img width="20%" src="img/bariton.png"/></a></div>
-
-	                <!-- MAIN NAVIGATION --> 
-	                <div class="navbaralign">
-	                    <div class="span12">
-	                        <div class="navbar">
-	                            <div class="navbar-inner">
-	                                <a data-target=".navbar-responsive-collapse" data-toggle="collapse" class="btn btn-navbar">
-	                                    <span class="icon-bar"></span>
-	                                    <span class="icon-bar"></span>
-	                                    <span class="icon-bar"></span>
-	                                </a>
-	                                <div class="nav-collapse collapse navbar-responsive-collapse menufontsize">
-	                                    <ul class="nav">
-	                                        <li class="active"><a href="index.html">HOME</a></li>
-	                                        <li><a>|</a></li>
-	                                        <li><a href="product.html">OUR PRODUCT</a></li>
-	                                        <li><a>|</a></li>
-	                                        <li><a href="about.html">ABOUT US</a></li>
-	                                        <li><a>|</a></li>
-	                                        <li><a href="contact.html">CONTACT</a></li>
-	                                        <li><a>|</a></li>
-	                                        <li class="dropdown">
-	                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">MEMBER <b class="caret"></b></a>
-	                                            <ul class="dropdown-menu">
-	                                                <li><a href="signin.html">Sign In</a></li>
-	                                                <li><a href="register.html">Register</a></li>
-	                                            </ul>
-	                                        </li>
-	                                    </ul>
-	                                </div>
-	                            </div>
-	                        </div>
-	                    </div>
-	                </div>
-	                <!-- MAIN NAVIGATION -->  
-	            </div>
-	        </div>
-	    </div>
-	    <!-- /HEADER ROW -->
-
+		@include('upperbar')
 	    <div class="container">
 	        <!--Carousel
 	        ==================================================-->
@@ -180,18 +98,6 @@
 	    </div>
 	    <br><br>
 	    
-	    <!--Footer
-	    ==========================-->
-	    <footer>
-	        <div class="container">
-	            <div class="row">
-	                <div class="span12 centeralign">Copyright &copy 2017 Bariton Bakery <br>
-	                    <small>By: C2-G03 Sistem Informasi</small>
-	                </div>
-	            </div>
-	        </div>
-	    </footer>
-	    <!--/.Footer-->
-	    
+	    @include('footer')
 	</body>
 </html>

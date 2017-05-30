@@ -20,6 +20,6 @@ Route::get('home', function () {
     return view('home');
 });
 
-Route::get('foo', function () {
-    return 'Hello World';
+Route::get('produk/{id}', function ($id) {
+    return view('produk',['prod_id'=>$id]);
 });
