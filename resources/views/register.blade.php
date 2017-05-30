@@ -32,6 +32,14 @@
                 </div>
             </div>
             <!-- /. PAGE TITLE-->
+            @if($errors->any())
+                <div class="alert alert-danger">
+                @foreach($errors->all() as $err)
+                    <li><span>{{ $err }}</li>
+                @endforeach
+                </div>
+            @endif
+
             <div class="row">
                 <form class="form-horizontal span12" method="POST" action="{{route('registerproceed')}}">
                     <div class="span12">
@@ -51,7 +59,7 @@
                     <div class="span12">
                         <label class="control-label span5" >Password: </label>
                         <div class="span7">
-                            <input type="text" class="form-control span3" name="password">
+                            <input type="password" class="form-control span3" name="password">
                         </div>
                         <input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
                         <input class="btn btnfontsize" type="submit" value="Register">
