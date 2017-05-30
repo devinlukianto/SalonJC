@@ -16,10 +16,31 @@ Route::get('/', function () {
 });
 
 
+//ROUTE UNTUK MENUBAR
 Route::get('home', function () {
     return view('home');
-});
+})->name('homeroute');
 
-Route::get('produk/{id}', function ($id) {
-    return view('produk',['prod_id'=>$id]);
-});
+Route::get('catalogue', function () {
+    return view('home');
+})->name('catalogue');
+
+Route::get('aboutus', function () {
+    return view('home');
+})->name('aboutus');
+
+Route::get('contact', function () {
+    return view('home');
+})->name('contact');
+
+Route::get('signinpage', function () {
+    return view('home');
+})->name('signinpage');
+
+Route::get('registerpage', function () {
+    return view('home');
+})->name('registerpage');
+
+
+//ROUTE UNTUK DETAIL PRODUK
+Route::get('produk/{id}', 'PageController@fetchproduct')->name('produk');

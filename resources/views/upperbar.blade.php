@@ -20,19 +20,19 @@
 	                                </a>
 	                                <div class="nav-collapse collapse navbar-responsive-collapse menufontsize">
 	                                    <ul class="nav">
-	                                        <li><a href="index.html">HOME</a></li>
+	                                        <li><a href="{{route('homeroute')}}">HOME</a></li>
 	                                        <li><a>|</a></li>
-	                                        <li><a href="product.html">OUR PRODUCT</a></li>
+	                                        <li><a href="{{route('catalogue')}}">OUR PRODUCT</a></li>
 	                                        <li><a>|</a></li>
-	                                        <li><a href="about.html">ABOUT US</a></li>
+	                                        <li><a href="{{route('aboutus')}}">ABOUT US</a></li>
 	                                        <li><a>|</a></li>
-	                                        <li><a href="contact.html">CONTACT</a></li>
+	                                        <li><a href="{{route('contact')}}">CONTACT</a></li>
 	                                        <li><a>|</a></li>
 	                                        <li class="dropdown">
 	                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">MEMBER <b class="caret"></b></a>
 	                                            <ul class="dropdown-menu">
-	                                                <li><a href="signin.html">Sign In</a></li>
-	                                                <li><a href="register.html">Register</a></li>
+	                                                <li><a href="{{route('signinpage')}}">Sign In</a></li>
+	                                                <li><a href="{{route('registerpage')}}">Register</a></li>
 	                                            </ul>
 	                                        </li>
 	                                    </ul>
