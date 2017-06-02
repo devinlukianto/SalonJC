@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
+use App\Product;
 
 class ProductController extends Controller
 {
@@ -11,12 +15,11 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-
-
     public function index()
     {
-        return view('listproduct');
+        //
+        $products = Product::all();
+        return view('products.index')->with('products',$products);
     }
 
     /**
@@ -26,7 +29,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('addproduct');
+        //
+        return view('products.create');
     }
 
     /**
@@ -38,6 +42,29 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
+        $rules = array(
+            'name'=>'required',
+            'price'=>'required',
+            'stock'=>'required',
+            'description'=>'required'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if($validator->fails()) {
+            return Redirect::to('products.create')
+                ->withErrors($validator)
+                ->withInput(Input::except('password'));
+        } else {
+            $product = new Product;
+            $product->name = Input::get('name');
+            $product->price = Input::get('price');
+            $product->stock = Input::get('stock');
+            $product->description = Input::get('description');
+            $product->save();
+
+            return redirect('products');
+        }
     }
 
     /**
@@ -48,7 +75,9 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        return view('detaillistproduct', ['prod_id'=>$id]);
+        //
+        $product = Product::find($id);
+        return view('products.show')->with('product',$product);
     }
 
     /**
@@ -59,7 +88,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        return view('editproduct', ['prod_id'=>$id]);
+        //
+        $product = Product::find($id);
+        return view('products.edit')->with('product',$product);
     }
 
     /**
@@ -72,6 +103,31 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $product = Product::find($id);
+
+        $rules = array(
+            'name'=>'required',
+            'price'=>'required',
+            'stock'=>'required',
+            'description'=>'required'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if($validator->fails()) {
+            return Redirect::to('products.create')
+                ->withErrors($validator)
+                ->withInput(Input::except('password'));
+        } else {
+            $product->name = Input::get('name');
+            $product->price = Input::get('price');
+            $product->stock = Input::get('stock');
+            $product->description = Input::get('description');
+            $product->update();
+
+            return redirect('products');
+        }
+
     }
 
     /**
@@ -83,5 +139,9 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+        $product = Product::find($id);
+        $product->delete();
+
+        return redirect('products');
     }
 }

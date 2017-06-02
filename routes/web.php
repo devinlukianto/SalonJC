@@ -36,6 +36,9 @@ Route::get('contact', function () {
 Route::get('produk/{id}', 'PageController@fetchproduct')->name('produk');
 
 //ROUTE UNTUK REGISTER
+
+//ROUTE UNTUK CRUD PRODUK
+Route::resource('products','ProductController');
 Route::get('register', 'RegisterController@showPage')->name('registerget');
 Route::post('register', 'RegisterController@doRegister')->name('registerpost');
 
@@ -45,7 +48,7 @@ Route::post('login', 'LoginController@doLogin')->name('loginpost');
 Route::get('logout', 'LoginController@doLogout')->name('logout');
 Route::get('guestlogin', 'LoginController@doGuest')->name('guestget');
 
-//ROUTE UNTUK LIST PRODUK
+//ROUTE UNTUK LIST PRODUK //JOVIAN
 Route::get('listproduct', [
     'uses' => 'ProductController@index',
     'as' => 'listproduct'
@@ -65,3 +68,5 @@ Route::get('addproduct', [
     'uses' => 'ProductController@create',
     'as' => 'addproduct'
 ]);
+
+//JOVIAN sampe sini
