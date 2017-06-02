@@ -1,16 +1,16 @@
-{{ Form::open(array('route' => array('products.update', $product->id))) }}
+{{ Form::model($product, array('route' => array('products.update', $product->id), 'method'=>'PUT')) }}
 
 	{{ Form::label('name','Name') }}
-	{{ Form::text('name', Input::old($product->name)) }}
+	{{ Form::text('name', $product->name) }}
 <br>
 	{{ Form::label('price','Price') }}
-	{{ Form::text('price', Input::old('price')) }}	
+	{{ Form::text('price', $product->price) }}	
 <br>
 	{{ Form::label('stock','Stock') }}
-	{{ Form::text('stock', Input::old('stock')) }}
+	{{ Form::text('stock', $product->stock) }}
 <br>
 	{{ Form::label('description','Description') }}
-	{{ Form::textarea('description', Input::old('description')) }}
+	{{ Form::textarea('description', $product->description) }}
 <br>
 	{{ Form::submit('Edit product') }}
 

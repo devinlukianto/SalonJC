@@ -105,6 +105,29 @@ class ProductController extends Controller
         //
         $product = Product::find($id);
 
+        $rules = array(
+            'name'=>'required',
+            'price'=>'required',
+            'stock'=>'required',
+            'description'=>'required'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if($validator->fails()) {
+            return Redirect::to('products.create')
+                ->withErrors($validator)
+                ->withInput($Input::except('password'));
+        } else {
+            $product->name = Input::get('name');
+            $product->price = Input::get('price');
+            $product->stock = Input::get('stock');
+            $product->description = Input::get('description');
+            $product->update();
+
+            return redirect('products');
+        }
+
     }
 
     /**
@@ -116,5 +139,9 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+        $product = Product::find($id);
+        $product->delete();
+
+        return redirect('products');
     }
 }
