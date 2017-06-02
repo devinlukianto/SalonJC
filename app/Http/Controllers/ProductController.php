@@ -54,7 +54,7 @@ class ProductController extends Controller
         if($validator->fails()) {
             return Redirect::to('products.create')
                 ->withErrors($validator)
-                ->withInput($Input::except('password'));
+                ->withInput(Input::except('password'));
         } else {
             $product = new Product;
             $product->name = Input::get('name');
@@ -117,7 +117,7 @@ class ProductController extends Controller
         if($validator->fails()) {
             return Redirect::to('products.create')
                 ->withErrors($validator)
-                ->withInput($Input::except('password'));
+                ->withInput(Input::except('password'));
         } else {
             $product->name = Input::get('name');
             $product->price = Input::get('price');

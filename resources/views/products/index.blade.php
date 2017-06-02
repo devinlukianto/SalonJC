@@ -1,3 +1,5 @@
+<a href="{{ URL::to('products/create') }}">Add new Product</a>
+<hr>
 @foreach($products as $product)
 	{{$product->name}}<br>
 	{{$product->price}}<br>
