@@ -17,9 +17,11 @@ class RegisterController extends Controller
     public function add(RegisterRequest $request)
     {
         $user = new \App\Models\User;
-        $user->id    = Input::get('id');
+        $user->nama     = Input::get('nama');
         $user->email    = Input::get('email');
         $user->password = Input::get('password');
+        $user->alamat = Input::get('alamat');
+        $user->telepon = Input::get('telepon');
         $user->save();
 
         return redirect('home')->with('status', 'Register successful, please login to proceed!');

@@ -12,9 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('homeroute');
 });
-
 
 //ROUTE UNTUK MENUBAR
 Route::get('home', function () {

@@ -4,6 +4,12 @@
 
 @section('title', 'Sign In')
 
+<style>    
+    .btn {
+        font-family: "Source Sans Pro";
+    }
+</style>
+
 @section('content')    
     <!--PAGE TITLE-->
     <div class="row">
