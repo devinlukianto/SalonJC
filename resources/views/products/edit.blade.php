@@ -15,3 +15,5 @@
 	{{ Form::submit('Edit product') }}
 
 {{ Form::close() }}
+    <a href="{{ URL::to('products') }}">Back to product index</a>
+	<a class="btn" href="{{ URL::to('products/' . $product->id) }}">Back to show product</a>

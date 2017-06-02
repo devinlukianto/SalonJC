@@ -15,3 +15,4 @@
 	{{ Form::submit('Create product') }}
 
 {{ Form::close() }}
+    <a href="{{ URL::to('products') }}">Back to product index</a>
