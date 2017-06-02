@@ -29,7 +29,7 @@
     @endif
 
     <div class="row">
-        <form class="form-horizontal span12" method="POST" action="{{route('registerproceed')}}">
+        <form class="form-horizontal span12" method="POST" action="{{route('registerpost')}}">
             <div class="span12">
                 <label class="control-label span5">Nama Lengkap: </label>
                 <div class="span7">

@@ -87,10 +87,17 @@
                                                 <li><a>|</a></li>
                                                 <li class="dropdown {{$nav_user or ''}}">
                                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">MEMBER <b class="caret"></b></a>
+                                                    @if (Auth::check())
                                                     <ul class="dropdown-menu">
-                                                        <li><a href="{{route('signinpage')}}">Sign In</a></li>
-                                                        <li><a href="{{route('registerpage')}}">Register</a></li>
+                                                        <li><a href="{{route('homeroute')}}">My Cart</a></li>
+                                                        <li><a href="{{route('logout')}}">Sign Out</a></li>
                                                     </ul>
+                                                    @else
+                                                    <ul class="dropdown-menu">
+                                                        <li><a href="{{route('loginget')}}">Sign In</a></li>
+                                                        <li><a href="{{route('registerget')}}">Register</a></li>
+                                                    </ul>
+                                                    @endif
                                                 </li>
                                             </ul>
                                         </div>
@@ -115,7 +122,6 @@
             @yield('content')
         </div>
         <br><br>
-
         <footer>
             <div class="container">
                 <div class="row">

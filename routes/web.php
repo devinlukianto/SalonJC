@@ -32,16 +32,15 @@ Route::get('contact', function () {
     return view('contact');
 })->name('contact');
 
-Route::get('signinpage', function () {
-    return view('signin');
-})->name('signinpage');
-
-Route::get('register', function () {
-    return view('register');
-})->name('registerpage');
-
 //ROUTE UNTUK DETAIL PRODUK
 Route::get('produk/{id}', 'PageController@fetchproduct')->name('produk');
 
 //ROUTE UNTUK REGISTER
-Route::post('/register', 'RegisterController@add')->name('registerproceed');
+Route::get('register', 'RegisterController@showPage')->name('registerget');
+Route::post('register', 'RegisterController@doRegister')->name('registerpost');
+
+//ROUTE UNTUK LOGIN
+Route::get('login', 'LoginController@showPage')->name('loginget');
+Route::post('login', 'LoginController@doLogin')->name('loginpost');
+Route::get('logout', 'LoginController@doLogout')->name('logout');
+Route::get('guestlogin', 'LoginController@doGuest')->name('guestget');

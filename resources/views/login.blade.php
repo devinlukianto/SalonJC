@@ -21,28 +21,30 @@
     </div>
     <!-- /. PAGE TITLE-->
     <div class="row">
-		<form class="form-horizontal span12" id="login" action="signin.php" method="POST" onSubmit="return validateInput();">
+		<form class="form-horizontal span12" method="POST" action="{{route('loginpost')}}">
             <div class="span12">
-                <label class="control-label span5">Alamat Email: </label>
+                <label class="control-label span5">Email: </label>
                 <div class="span7">
-                    <input type="text" class="form-control span4" name="user-email" id="email">
+                    <input type="text" class="form-control span4" name="email">
                 </div>
             </div>
-            <br><br>
-            <div class="span12">
-                <label class="control-label span5" >Password: </label>
+           <div class="span12">
+                <label class="control-label span5">Password: </label>
                 <div class="span7">
-                    <input type="password" class="form-control span4" name="password" id="pass">
+                    <input type="password" class="form-control span4" name="password">
                     <br><br>
-                    <input id="loginbutton" class="btn btn-primary" type="submit" name="loginsubmit" value="SIGN IN">
+                    <input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
+                    <input type="submit" class="btn btn-primary" value="LOGIN">
                 </div>
             </div>
-            <br><br><br><br><br><br><br>
+        </form>
+        <br><br><br><br><br><br><br>
+        <form class="form-horizontal span12" method="GET" action="{{route('guestget')}}">
             <div class="span12">
                 <label class="control-label span5" >or CONTINUE AS GUEST </label>
                 <div class="span7">
                     <p>Continue your order as a guest, you can sign up later for your account</p>
-                    <input id="guestbutton" class="btn btn-primary" type="submit" name="guestsubmit" value="GUEST PAGE">
+                    <input type="submit" class="btn btn-primary" value="GUEST PAGE">
                 </div>
             </div>
         </form>
