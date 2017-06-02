@@ -1,4 +1,4 @@
-<?php $nav_product='active';?>
+<?php $nav_user='active';?>
 
 @extends('layout.master')
 
