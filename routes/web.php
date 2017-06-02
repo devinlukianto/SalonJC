@@ -22,29 +22,24 @@ Route::get('home', function () {
 })->name('homeroute');
 
 Route::get('catalogue', function () {
-    return view('home');
+    return view('catalogue');
 })->name('catalogue');
 
 Route::get('aboutus', function () {
-    return view('home');
+    return view('about');
 })->name('aboutus');
 
 Route::get('contact', function () {
-    return view('home');
+    return view('contact');
 })->name('contact');
 
 Route::get('signinpage', function () {
-    return view('home');
+    return view('signin');
 })->name('signinpage');
 
 Route::get('register', function () {
     return view('register');
 })->name('registerpage');
-
-Route::get('coba', function () {
-    return view('coba');
-})->name('coba');
-
 
 //ROUTE UNTUK DETAIL PRODUK
 Route::get('produk/{id}', 'PageController@fetchproduct')->name('produk');

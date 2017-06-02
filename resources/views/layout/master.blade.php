@@ -2,7 +2,7 @@
 <html lang="{{ config('app.locale') }}">
     <head>
         <meta charset="utf-8">
-        <title>JC Salon - @yield('title')</title>
+        <title>Bariton Bakery - @yield('title')</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -18,43 +18,45 @@
     </head>
 
     <!--STYLE OVERRIDE-->
-    <style>
-        div, h1, h2, h3 {
-            font-family: Perpetua, serif;
-        }
-        
-        p {
-            font-size: 20px;
-        }
-        
-        #header-row {
-            background-color: white;
-        }
-        
-        .centeralign {
-            text-align: center;
-        }
-        
-        .navbaralign {
-            margin-left: 14%;
-            text-align: center;
-        }
-        
-        .menufontsize {
-            font-size: 22px;
-        }
-        
-        .imgadjustcarousel {
-            height: 100%;
-            width: 100%; 
-            object-fit: contain;
-        }
-        
-        .imgadjustproduct {
-            height: 175px;
-            object-fit: scale-down;
-        }
-    </style>
+        @section('style')
+        <style>
+            div, h1, h2, h3 {
+                font-family: Perpetua, serif;
+            }
+            
+            p {
+                font-size: 20px;
+            }
+            
+            #header-row {
+                background-color: white;
+            }
+            
+            .centeralign {
+                text-align: center;
+            }
+            
+            .navbaralign {
+                margin-left: 14%;
+                text-align: center;
+            }
+            
+            .menufontsize {
+                font-size: 22px;
+            }
+            
+            .imgadjustcarousel {
+                height: 100%;
+                width: 100%; 
+                object-fit: contain;
+            }
+            
+            .imgadjustproduct {
+                height: 175px;
+                object-fit: scale-down;
+            }
+        </style>
+    @show
 
     <body>
         @section('header')
@@ -85,7 +87,7 @@
                                                 <li><a>|</a></li>
                                                 <li class="{{$nav_contact or ''}}"><a href="{{route('contact')}}">CONTACT</a></li>
                                                 <li><a>|</a></li>
-                                                <li class="dropdown">
+                                                <li class="dropdown {{$nav_user or ''}}">
                                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">MEMBER <b class="caret"></b></a>
                                                     <ul class="dropdown-menu">
                                                         <li><a href="{{route('signinpage')}}">Sign In</a></li>
@@ -119,7 +121,7 @@
         <footer>
             <div class="container">
                 <div class="row">
-                    <div class="span12 centeralign">Copyright &copy 2017 JC Salon <br>
+                    <div class="span12 centeralign">Copyright &copy 2017 Bariton Bakery <br>
                         <small>By: Suitmedia Internee</small>
                     </div>
                 </div>

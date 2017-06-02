@@ -1,4 +1,5 @@
 <?php $nav_product='active';?>
+
 @extends('layout.master')
 
 @section('title', 'Produk')
