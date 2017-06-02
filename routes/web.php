@@ -49,3 +49,26 @@ Route::post('/register', 'RegisterController@add')->name('registerproceed');
 
 //ROUTE UNTUK CRUD PRODUK
 Route::resource('products','ProductController');
+
+//ROUTE UNTUK LIST PRODUK //JOVIAN
+Route::get('listproduct', [
+    'uses' => 'ProductController@index',
+    'as' => 'listproduct'
+]);
+
+Route::get('editproduct/{id}', [
+    'uses' => 'ProductController@edit',
+    'as' => 'editproduct'
+]);
+
+Route::get('listproduct/{id}', [
+    'uses' => 'ProductController@show',
+    'as' => 'detaillistproduct'
+]);
+
+Route::get('addproduct', [
+    'uses' => 'ProductController@create',
+    'as' => 'addproduct'
+]);
+
+//JOVIAN sampe sini

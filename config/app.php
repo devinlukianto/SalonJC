@@ -176,8 +176,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
-        Reliese\Coders\CodersServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
 
         'Collective\Html\HtmlServiceProvider'
 
@@ -231,10 +230,10 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
-
         'Input' => Illuminate\Support\Facades\Input::class,
         'Form'=> 'Collective\Html\FormFacade',
         'HTML'=> 'Collective\Html\HtmlFacade'
+
     ],
 
 ];
