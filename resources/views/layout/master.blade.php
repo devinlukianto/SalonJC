@@ -75,6 +75,7 @@
                                             <span class="icon-bar"></span>
                                             <span class="icon-bar"></span>
                                         </a>
+                                        @section('navbar')
                                         <div class="nav-collapse collapse navbar-responsive-collapse menufontsize">
                                             <ul class="nav">
                                                 <li class="{{$nav_home or ''}}"><a href="{{route('homeroute')}}">HOME</a></li>
@@ -101,6 +102,7 @@
                                                 </li>
                                             </ul>
                                         </div>
+                                        @show
                                     </div>
                                 </div>
                             </div>

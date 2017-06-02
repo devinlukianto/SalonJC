@@ -44,3 +44,24 @@ Route::get('login', 'LoginController@showPage')->name('loginget');
 Route::post('login', 'LoginController@doLogin')->name('loginpost');
 Route::get('logout', 'LoginController@doLogout')->name('logout');
 Route::get('guestlogin', 'LoginController@doGuest')->name('guestget');
+
+//ROUTE UNTUK LIST PRODUK
+Route::get('listproduct', [
+    'uses' => 'ProductController@index',
+    'as' => 'listproduct'
+]);
+
+Route::get('editproduct/{id}', [
+    'uses' => 'ProductController@edit',
+    'as' => 'editproduct'
+]);
+
+Route::get('listproduct/{id}', [
+    'uses' => 'ProductController@show',
+    'as' => 'detaillistproduct'
+]);
+
+Route::get('addproduct', [
+    'uses' => 'ProductController@create',
+    'as' => 'addproduct'
+]);
