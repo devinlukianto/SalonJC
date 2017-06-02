@@ -4,22 +4,19 @@
 
 @section('title', 'Catalogue')
 
-@section('style')
-    @parent 
-    <style>
-        .rotifontsize {
-            font-size: 26px;
-            font-family: "Cambria";
-            text-align: center;
-        }
-        
-        .imgadjustproduct {
-            height: 200px;
-            width: 200px;
-            object-fit: contain;
-        }
-    </style>
-@endsection
+<style>
+    .rotifontsize {
+        font-size: 26px;
+        font-family: "Cambria";
+        text-align: center;
+    }
+    
+    .imgadjustproduct {
+        height: 200px;
+        width: 200px;
+        object-fit: contain;
+    }
+</style>
 
 @section('content')
     <!--PAGE TITLE-->

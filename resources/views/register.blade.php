@@ -3,18 +3,13 @@
 @extends('layout.master')
 
 @section('title', 'Register')
+
 <style>    
-    .rotifontsize {
-        font-size: 26px;
-        text-align: center;
-    }
-    
-    .imgadjustproduct {
-        height: 200px;
-        width: 200px;
-        object-fit: contain;
+    .btn {
+        font-family: "Source Sans Pro";
     }
 </style>
+
 @section('content')
    <!--PAGE TITLE-->
     <div class="row">
@@ -34,42 +29,42 @@
     @endif
 
     <div class="row">
-        <form class="form-horizontal span12" method="POST" action="{{route('registerproceed')}}">
+        <form class="form-horizontal span12" method="POST" action="{{route('registerpost')}}">
             <div class="span12">
                 <label class="control-label span5">Nama Lengkap: </label>
                 <div class="span7">
-                    <input type="text" class="form-control span4" id="nama">
+                    <input type="text" class="form-control span4" name="nama">
                 </div>
             </div>
             <br><br>
             <div class="span12">
                 <label class="control-label span5">Alamat Email: </label>
                 <div class="span7">
-                    <input type="text" class="form-control span4" id="email">
+                    <input type="text" class="form-control span4" name="email">
                 </div>
             </div>
             <br><br>
             <div class="span12">
                 <label class="control-label span5" >Password: </label>
                 <div class="span7">
-                    <input type="text" class="form-control span3" id="pass">
+                    <input type="password" class="form-control span3" name="password">
                 </div>
             </div>
             <br><br>
             <div class="span12">
                 <label class="control-label span5">Alamat Lengkap: </label>
                 <div class="span7">
-                    <input type="text" class="form-control span6" id="alamat">
+                    <input type="text" class="form-control span6" name="alamat">
                 </div>
             </div>
             <br><br>
             <div class="span12">
                 <label class="control-label span5">Nomor Telepon: </label>
                 <div class="span7">
-                    <input type="text" class="form-control span3" id="telp">
+                    <input type="text" class="form-control span3" name="telepon">
                     <br><br>
                     <input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
-                    <a href="signin.html" class="btn btn-primary" type="button">REGISTER</a>
+                    <input type="submit" class="btn btn-primary" value="REGISTER">
                 </div>
             </div>
             <br><br>
