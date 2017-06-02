@@ -46,3 +46,25 @@ Route::get('produk/{id}', 'PageController@fetchproduct')->name('produk');
 
 //ROUTE UNTUK REGISTER
 Route::post('/register', 'RegisterController@add')->name('registerproceed');
+
+
+//ROUTE UNTUK LIST PRODUK
+Route::get('listproduct', [
+    'uses' => 'ProductController@index',
+    'as' => 'listproduct'
+]);
+
+Route::get('editproduct/{id}', [
+    'uses' => 'ProductController@edit',
+    'as' => 'editproduct'
+]);
+
+Route::get('listproduct/{id}', [
+    'uses' => 'ProductController@show',
+    'as' => 'detaillistproduct'
+]);
+
+Route::get('addproduct', [
+    'uses' => 'ProductController@create',
+    'as' => 'addproduct'
+]);
