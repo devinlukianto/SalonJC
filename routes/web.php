@@ -46,3 +46,6 @@ Route::get('produk/{id}', 'PageController@fetchproduct')->name('produk');
 
 //ROUTE UNTUK REGISTER
 Route::post('/register', 'RegisterController@add')->name('registerproceed');
+
+//ROUTE UNTUK CRUD PRODUK
+Route::resource('products','ProductController');

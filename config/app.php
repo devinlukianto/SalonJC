@@ -179,6 +179,9 @@ return [
 
         Reliese\Coders\CodersServiceProvider::class,
 
+        'Collective\Html\HtmlServiceProvider'
+
+
     ],
 
     /*
@@ -228,6 +231,10 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+
+        'Input' => Illuminate\Support\Facades\Input::class,
+        'Form'=> 'Collective\Html\FormFacade',
+        'HTML'=> 'Collective\Html\HtmlFacade'
     ],
 
 ];
