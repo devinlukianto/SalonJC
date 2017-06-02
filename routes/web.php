@@ -41,6 +41,10 @@ Route::get('register', function () {
     return view('register');
 })->name('registerpage');
 
+Route::get('coba', function () {
+    return view('coba');
+})->name('coba');
+
 
 //ROUTE UNTUK DETAIL PRODUK
 Route::get('produk/{id}', 'PageController@fetchproduct')->name('produk');

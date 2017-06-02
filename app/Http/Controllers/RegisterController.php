@@ -22,6 +22,6 @@ class RegisterController extends Controller
         $user->password = Input::get('password');
         $user->save();
 
-        return redirect('/register');
+        return redirect('home')->with('status', 'Register successful, please login to proceed!');
     }
 }
