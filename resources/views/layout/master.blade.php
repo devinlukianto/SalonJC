@@ -18,45 +18,43 @@
     </head>
 
     <!--STYLE OVERRIDE-->
-        @section('style')
-        <style>
-            div, h1, h2, h3 {
-                font-family: Perpetua, serif;
-            }
-            
-            p {
-                font-size: 20px;
-            }
-            
-            #header-row {
-                background-color: white;
-            }
-            
-            .centeralign {
-                text-align: center;
-            }
-            
-            .navbaralign {
-                margin-left: 14%;
-                text-align: center;
-            }
-            
-            .menufontsize {
-                font-size: 22px;
-            }
-            
-            .imgadjustcarousel {
-                height: 100%;
-                width: 100%; 
-                object-fit: contain;
-            }
-            
-            .imgadjustproduct {
-                height: 175px;
-                object-fit: scale-down;
-            }
-        </style>
-    @show
+    <style>
+        div, h1, h2, h3 {
+            font-family: Perpetua, serif;
+        }
+        
+        p {
+            font-size: 20px;
+        }
+        
+        #header-row {
+            background-color: white;
+        }
+        
+        .centeralign {
+            text-align: center;
+        }
+        
+        .navbaralign {
+            margin-left: 14%;
+            text-align: center;
+        }
+        
+        .menufontsize {
+            font-size: 22px;
+        }
+        
+        .imgadjustcarousel {
+            height: 100%;
+            width: 100%; 
+            object-fit: contain;
+        }
+        
+        .imgadjustproduct {
+            height: 175px;
+            object-fit: scale-down;
+        }
+    </style>
 
     <body>
         @section('header')
@@ -90,10 +88,17 @@
                                                 <li><a>|</a></li>
                                                 <li class="dropdown {{$nav_user or ''}}">
                                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">MEMBER <b class="caret"></b></a>
+                                                    @if (Auth::check())
                                                     <ul class="dropdown-menu">
-                                                        <li><a href="{{route('signinpage')}}">Sign In</a></li>
-                                                        <li><a href="{{route('registerpage')}}">Register</a></li>
+                                                        <li><a href="{{route('homeroute')}}">My Cart</a></li>
+                                                        <li><a href="{{route('logout')}}">Sign Out</a></li>
                                                     </ul>
+                                                    @else
+                                                    <ul class="dropdown-menu">
+                                                        <li><a href="{{route('loginget')}}">Sign In</a></li>
+                                                        <li><a href="{{route('registerget')}}">Register</a></li>
+                                                    </ul>
+                                                    @endif
                                                 </li>
                                             </ul>
                                         </div>
@@ -119,7 +124,6 @@
             @yield('content')
         </div>
         <br><br>
-
         <footer>
             <div class="container">
                 <div class="row">
