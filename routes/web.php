@@ -49,18 +49,22 @@ Route::post('/register', 'RegisterController@add')->name('registerproceed');
 
 
 //ROUTE UNTUK LIST PRODUK
-Route::get('listproduct', function () {
-	return view('listproduct');
-})->name('listproduct');
+Route::get('listproduct', [
+    'uses' => 'ProductController@index',
+    'as' => 'listproduct'
+]);
 
-Route::get('editproduct/{id}', function ($id) {
-	return view('editproduct', ['prod_id'=>$id]);
-})->name('editproduct');
+Route::get('editproduct/{id}', [
+    'uses' => 'ProductController@edit',
+    'as' => 'editproduct'
+]);
 
-Route::get('listproduct/{id}', function ($id) {
-	return view('detaillistproduct', ['prod_id'=>$id]);
-})->name('detaillistproduct');
+Route::get('listproduct/{id}', [
+    'uses' => 'ProductController@show',
+    'as' => 'detaillistproduct'
+]);
 
-Route::get('addproduct', function () {
-	return view('addproduct');
-})->name('addproduct');
+Route::get('addproduct', [
+    'uses' => 'ProductController@create',
+    'as' => 'addproduct'
+]);

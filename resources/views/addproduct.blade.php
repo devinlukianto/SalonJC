@@ -17,7 +17,22 @@
 
 <!--FORM-->
 <!-- actionnya backend -->
-<form method="post" action="">
+{{ Form::open(['url' => 'products', 'method' => 'post']) }}
+    {{ Form::label('id_produk', 'ID Produk') }}
+    {{ Form::text('id_produk') }}
+
+    {{ Form::label('nama_produk', 'Nama') }}
+    {{ Form::text('nama_produk') }}
+
+    {{ Form::label('harga', 'Harga') }}
+    {{ Form::text('harga') }}
+
+    {{ Form::label('deskripsi', 'Deskripsi') }}
+    {{ Form::text('deskripsi') }}
+    <br>
+    {{ Form::submit('Add') }}
+{{ Form::close() }}
+<!--<form method="post" action="">
     ID Produk<br>
     <input type="text" name="id_produk"><br>
     Nama<br>
@@ -31,5 +46,5 @@
     
     <input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
     <input type="submit" value="Save">
-</form>
+</form>-->
 @stop
