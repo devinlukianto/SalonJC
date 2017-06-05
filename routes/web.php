@@ -70,3 +70,6 @@ Route::get('addproduct', [
 ]);
 
 //JOVIAN sampe sini
+
+Route::resource('news', 'NewsController');
+Route::resource('comment', 'CommentController');
