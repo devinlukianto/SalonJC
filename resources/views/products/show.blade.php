@@ -17,10 +17,12 @@
 
 <!--DETAIL-->
     <!--Tinggal ambil data dari db-->
-    <p>{{$product->name}}</p>
-    <p>{{$product->price}}</p>
-    <p>{{$product->stock}}</p>
+    <h2>{{$product->name}}</h2>
+    <p>Harga: {{$product->price}}</p>
+    <p>Stok saat ini:{{$product->stock}}</p>
+    <hr>
     <p>{{$product->description}}</p>
+    <br><hr>
     <a class="btn" href="{{ URL::to('products') }}">Back to product index</a>
     <a class="btn" href="{{ URL::to('products/' . $product->id . '/edit') }}">Edit this Product</a>
     {{ Form::open(array('url' => 'products/' . $product->id, 'class' => 'pull-right')) }}
