@@ -26,4 +26,10 @@
         {{ Form::hidden('_method', 'DELETE') }}
         {{ Form::submit('Delete this Category', array('class' => 'btn btn-warning')) }}
     {{ Form::close() }}
+
+    <br>
+    <h2>PRODUK</h2>
+    @foreach ($products as $product)
+    <p>{{$product->name}}</p>
+    @endforeach
 @stop

@@ -34,6 +34,7 @@ class ProductController extends Controller
     {
         //
         $categories = Category::pluck('nama','id');
+
         return view('products.create', ['categories'=>$categories]);
     }
 
@@ -83,8 +84,8 @@ class ProductController extends Controller
     {
         //
         $product = Product::find($id);
-        $categories = Category::all();
-        return view('products.show')->with('product',$product)->with('categories',$categories);
+        $category = $product->category()->get();
+        return view('products.show')->with('product',$product)->with('category',$category);
     }
 
     /**
