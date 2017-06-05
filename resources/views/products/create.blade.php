@@ -1,3 +1,21 @@
+@extends('layout.master')
+
+@section('title', 'Add Product')
+
+@section('navbar')
+@endsection
+
+@section('content')
+<!--PAGE TITLE-->
+    <div class="row">
+        <div class="span12">
+            <div class="page-header">
+                <h1>Add Product</h1>
+            </div>
+        </div>
+    </div>
+
+
 {{ Form::open(array('url' => 'products')) }}
 
 	{{ Form::label('name','Name') }}
@@ -16,3 +34,5 @@
 
 {{ Form::close() }}
     <a href="{{ URL::to('products') }}">Back to product index</a>
+
+@stop

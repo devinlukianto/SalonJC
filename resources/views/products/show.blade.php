@@ -1,14 +1,30 @@
-<h1>Produk #{{$product->id}}</h1>
+@extends('layout.master')
 
+@section('title', 'Detail Product')
 
-	{{$product->name}}<br>
-	{{$product->price}}<br>
-	{{$product->stock}}<br>
-	{{$product->description}}<br>
+@section('navbar')
+@endsection
 
-    <a href="{{ URL::to('products') }}">Back to product index</a>
-    <a href="{{ URL::to('products/' . $product->id . '/edit') }}">Edit this Product</a>
+@section('content')
+<!--PAGE TITLE-->
+    <div class="row">
+        <div class="span12">
+            <div class="page-header">
+                <h1>Detail Product</h1>
+            </div>
+        </div>
+    </div>
+
+<!--DETAIL-->
+    <!--Tinggal ambil data dari db-->
+    <p>{{$product->name}}</p>
+    <p>{{$product->price}}</p>
+    <p>{{$product->stock}}</p>
+    <p>{{$product->description}}</p>
+    <a class="btn" href="{{ URL::to('products') }}">Back to product index</a>
+    <a class="btn" href="{{ URL::to('products/' . $product->id . '/edit') }}">Edit this Product</a>
     {{ Form::open(array('url' => 'products/' . $product->id, 'class' => 'pull-right')) }}
         {{ Form::hidden('_method', 'DELETE') }}
         {{ Form::submit('Delete this Product', array('class' => 'btn btn-warning')) }}
     {{ Form::close() }}
+@stop

@@ -1,3 +1,20 @@
+@extends('layout.master')
+
+@section('title', 'Edit Product')
+
+@section('navbar')
+@endsection
+
+@section('content')
+<!--PAGE TITLE-->
+    <div class="row">
+        <div class="span12">
+            <div class="page-header">
+                <h1>Edit Product</h1>
+            </div>
+        </div>
+    </div>
+
 {{ Form::model($product, array('route' => array('products.update', $product->id), 'method'=>'PUT')) }}
 
 	{{ Form::label('name','Name') }}
@@ -12,8 +29,10 @@
 	{{ Form::label('description','Description') }}
 	{{ Form::textarea('description', $product->description) }}
 <br>
-	{{ Form::submit('Edit product') }}
+	{{ Form::submit('Edit product', array('class'=>'btn')) }}
 
 {{ Form::close() }}
-    <a href="{{ URL::to('products') }}">Back to product index</a>
+    <a class="btn" href="{{ URL::to('products') }}">Back to product index</a>
 	<a class="btn" href="{{ URL::to('products/' . $product->id) }}">Back to show product</a>
+
+@stop
