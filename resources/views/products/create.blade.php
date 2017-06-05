@@ -30,6 +30,9 @@
 	{{ Form::label('description','Description') }}
 	{{ Form::textarea('description', Input::old('description')) }}
 <br>
+	{{ Form::label('category','Category') }}
+	{{ Form::select('category', $categories) }}
+<br>
 	{{ Form::submit('Create product') }}
 
 {{ Form::close() }}

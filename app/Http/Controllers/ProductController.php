@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use App\Product;
+use App\Category;
 
 class ProductController extends Controller
 {
@@ -19,7 +20,8 @@ class ProductController extends Controller
     {
         //
         $products = Product::all();
-        return view('products.index')->with('products',$products);
+        $categories = Category::all();
+        return view('products.index')->with('products',$products)->with('categories',$categories);
     }
 
     /**
@@ -30,7 +32,8 @@ class ProductController extends Controller
     public function create()
     {
         //
-        return view('products.create');
+        $categories = Category::pluck('nama','id');
+        return view('products.create', ['categories'=>$categories]);
     }
 
     /**
@@ -46,7 +49,8 @@ class ProductController extends Controller
             'name'=>'required',
             'price'=>'required',
             'stock'=>'required',
-            'description'=>'required'
+            'description'=>'required',
+            'category'=> 'required'
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -61,6 +65,7 @@ class ProductController extends Controller
             $product->price = Input::get('price');
             $product->stock = Input::get('stock');
             $product->description = Input::get('description');
+            $product->id_category = Input::get('category');
             $product->save();
 
             return redirect('products');
@@ -77,7 +82,8 @@ class ProductController extends Controller
     {
         //
         $product = Product::find($id);
-        return view('products.show')->with('product',$product);
+        $categories = Category::all();
+        return view('products.show')->with('product',$product)->with('categories',$categories);
     }
 
     /**
@@ -90,7 +96,8 @@ class ProductController extends Controller
     {
         //
         $product = Product::find($id);
-        return view('products.edit')->with('product',$product);
+        $categories = Category::pluck('nama','id');
+        return view('products.edit')->with('product',$product)->with('categories',$categories);
     }
 
     /**

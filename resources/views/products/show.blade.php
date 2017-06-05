@@ -22,6 +22,12 @@
     <p>Stok saat ini:{{$product->stock}}</p>
     <hr>
     <p>{{$product->description}}</p>
+    <hr>
+    @foreach($categories as $category)
+        @if ($category->id == $product->id_category)
+            <p>Kategori : {{$category->nama}}</p>
+        @endif
+    @endforeach
     <br><hr>
     <a class="btn" href="{{ URL::to('products') }}">Back to product index</a>
     <a class="btn" href="{{ URL::to('products/' . $product->id . '/edit') }}">Edit this Product</a>

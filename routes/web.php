@@ -70,3 +70,6 @@ Route::get('addproduct', [
 ]);
 
 //JOVIAN sampe sini
+
+//ROUTE UNTUK KATEGORI
+Route::resource('categories','CategoryController');
