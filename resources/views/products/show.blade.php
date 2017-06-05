@@ -23,6 +23,9 @@
     <hr>
     <p>{{$product->description}}</p>
     <br><hr>
+    <p>Brand: {{$brand->name}}</p>
+    <p>{{$brand->description}}</p>
+    <br><hr>
     <a class="btn" href="{{ URL::to('products') }}">Back to product index</a>
     <a class="btn" href="{{ URL::to('products/' . $product->id . '/edit') }}">Edit this Product</a>
     {{ Form::open(array('url' => 'products/' . $product->id, 'class' => 'pull-right')) }}

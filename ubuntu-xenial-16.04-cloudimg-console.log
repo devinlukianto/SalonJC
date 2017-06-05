@@ -604,4 +604,48 @@ m] Mounted FUSE Control File System.
 
 Ubuntu 16.04.1 LTS laravel-xenial64 ttyS0
 
-laravel-xenial64 login: 
+laravel-xenial64 login: [11651.961554] e1000 0000:00:03.0 enp0s3: Detected Tx Unit Hang
+[11651.961554]   Tx Queue             <0>
+[11651.961554]   TDH                  <1b>
+[11651.961554]   TDT                  <25>
+[11651.961554]   next_to_use          <25>
+[11651.961554]   next_to_clean        <1b>
+[11651.961554] buffer_info[next_to_clean]
+[11651.961554]   time_stamp           <1002b4c94>
+[11651.961554]   next_to_watch        <20>
+[11651.961554]   jiffies              <1002b4de7>
+[11651.961554]   next_to_watch.status <0>
+[11654.337844] e1000 0000:00:03.0 enp0s3: Detected Tx Unit Hang
+[11654.337844]   Tx Queue             <0>
+[11654.337844]   TDH                  <1b>
+[11654.337844]   TDT                  <25>
+[11654.337844]   next_to_use          <25>
+[11654.337844]   next_to_clean        <1b>
+[11654.337844] buffer_info[next_to_clean]
+[11654.337844]   time_stamp           <1002b4c94>
+[11654.337844]   next_to_watch        <20>
+[11654.337844]   jiffies              <1002b5039>
+[11654.337844]   next_to_watch.status <0>
+[11655.969757] e1000 0000:00:03.0 enp0s3: Detected Tx Unit Hang
+[11655.969757]   Tx Queue             <0>
+[11655.969757]   TDH                  <1b>
+[11655.969757]   TDT                  <25>
+[11655.969757]   next_to_use          <25>
+[11655.969757]   next_to_clean        <1b>
+[11655.969757] buffer_info[next_to_clean]
+[11655.969757]   time_stamp           <1002b4c94>
+[11655.969757]   next_to_watch        <20>
+[11655.969757]   jiffies              <1002b51d1>
+[11655.969757]   next_to_watch.status <0>
+[11657.973085] e1000 0000:00:03.0 enp0s3: Detected Tx Unit Hang
+[11657.973085]   Tx Queue             <0>
+[11657.973085]   TDH                  <1b>
+[11657.973085]   TDT                  <25>
+[11657.973085]   next_to_use          <25>
+[11657.973085]   next_to_clean        <1b>
+[11657.973085] buffer_info[next_to_clean]
+[11657.973085]   time_stamp           <1002b4c94>
+[11657.973085]   next_to_watch        <20>
+[11657.973085]   jiffies              <1002b53c6>
+[11657.973085]   next_to_watch.status <0>
+[11659.821352] e1000 0000:00:03.0 enp0s3: Reset adapter
