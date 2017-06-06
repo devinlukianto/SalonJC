@@ -18,7 +18,7 @@
 <!--DETAIL-->
     <!--Tinggal ambil data dari db-->
     <h2>{{$category->name}}</h2>
-    <p>Deskripsi : {{$category->description}}</p>
+    <p>Description : {{$category->description}}</p>
     <br><hr>
     <a class="btn" href="{{ URL::to('categories') }}">Back to category index</a>
     <a class="btn" href="{{ URL::to('categories/' . $category->id . '/edit') }}">Edit this Category</a>

@@ -25,10 +25,10 @@
 
 {{ Form::open(array('url' => 'categories')) }}
 
-	{{ Form::label('name','Nama') }}
+	{{ Form::label('name','Name') }}
 	{{ Form::text('name', Input::old('name')) }}
 <br>
-	{{ Form::label('description','Deskripsi') }}
+	{{ Form::label('description','Description') }}
 	{{ Form::textarea('description', Input::old('description')) }}
 <br>
 	{{ Form::submit('Create category') }}

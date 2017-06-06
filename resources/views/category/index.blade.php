@@ -19,8 +19,8 @@
     <table width="100%" border="1" id="dataTables" style="font-size:80%;">
     <!--Header Table-->
     <tr>
-        <th color='black'> Nama </th>
-        <th color='black'> Deskripsi </th>
+        <th color='black'> Name </th>
+        <th color='black'> Description </th>
     </tr>
 	@foreach($categories as $category)
 	    <tr>
