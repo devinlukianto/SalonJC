@@ -35,8 +35,9 @@
 	    		</td>
 	    </tr>
 	@endforeach
-
     </table>
+
+    <div class = 'pagination' align = 'center'>{{ $categories->links() }}</div>
 
 <!--CREATE-->
     <br>
