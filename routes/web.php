@@ -39,6 +39,10 @@ Route::get('produk/{id}', 'PageController@fetchproduct')->name('produk');
 
 //ROUTE UNTUK CRUD PRODUK
 Route::resource('products','ProductController');
+
+//ROUTE UNTUk CRUD BRAND
+Route::resource('brands','BrandController');
+
 Route::get('register', 'RegisterController@showPage')->name('registerget');
 Route::post('register', 'RegisterController@doRegister')->name('registerpost');
 
@@ -48,28 +52,7 @@ Route::post('login', 'LoginController@doLogin')->name('loginpost');
 Route::get('logout', 'LoginController@doLogout')->name('logout');
 Route::get('guestlogin', 'LoginController@doGuest')->name('guestget');
 
-//ROUTE UNTUK LIST PRODUK //JOVIAN
-Route::get('listproduct', [
-    'uses' => 'ProductController@index',
-    'as' => 'listproduct'
-]);
-
-Route::get('editproduct/{id}', [
-    'uses' => 'ProductController@edit',
-    'as' => 'editproduct'
-]);
-
-Route::get('listproduct/{id}', [
-    'uses' => 'ProductController@show',
-    'as' => 'detaillistproduct'
-]);
-
-Route::get('addproduct', [
-    'uses' => 'ProductController@create',
-    'as' => 'addproduct'
-]);
-
-//ROUTE UNTUK NEWS DAN COMMENT
+//ROUTE CRUD NEWS DAN COMMENT
 Route::resource('news', 'NewsController');
 Route::resource('comment', 'CommentController');
 
@@ -77,3 +60,6 @@ Route::resource('comment', 'CommentController');
 Route::get('admin/home', function () {
     return view('admin.index');
 })->name('adminhome');
+
+//ROUTE UNTUK KATEGORI
+Route::resource('categories','CategoryController');
