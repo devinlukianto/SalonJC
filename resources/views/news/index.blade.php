@@ -37,15 +37,16 @@
             <div class="span9">
                 <div class="media-body">
                     <br>
-                    <h4 class="rotifontsize">{{ $value->title }}</h4> 
+                    <a href="{{ URL::to('news/' . $value->id) }}">
+                        <h4 class="rotifontsize">{{ $value->title }}</h4>
+                    </a>
                     <p>{{ $value->content }}</p>
                     <div>
-                        <a class="btn btn-small btn-success" href="{{ URL::to('news/' . $value->id) }}">View</a>
                         @if (Auth::check())
-                            <a class="btn btn-small btn-info" href="{{ URL::to('news/' . $value->id . '/edit') }}">Edit</a>
                             {{ Form::open(array('url' => 'news/' . $value->id, 'class' => 'pull-right'))}}
+                            <a class="btn btn-large btn-info" href="{{ URL::to('news/' . $value->id . '/edit') }}">Edit</a>
                             {{ Form::hidden('_method', 'DELETE') }}
-                            {{ Form::submit('Delete', array('class' => 'btn btn-small')) }}
+                            {{ Form::submit('Delete', array('class' => 'btn btn-large btn-danger')) }}
                             {{ Form::close() }}
                         @endif
                     </div>

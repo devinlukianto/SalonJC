@@ -19,7 +19,7 @@
 
     <!--STYLE OVERRIDE-->
     <style>
-        div, h1, h2, h3 {
+        div, h1, h2, h3, input {
             font-family: Perpetua, serif;
         }
         
