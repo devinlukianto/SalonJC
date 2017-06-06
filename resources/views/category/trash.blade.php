@@ -1,6 +1,6 @@
 @extends('layout.master')
 
-@section('title', 'List Category')
+@section('title', 'List Trash Category')
 
 @section('navbar')
 @endsection
@@ -10,7 +10,7 @@
     <div class="row">
         <div class="span12">
             <div class="page-header">
-                <h1>List Category</h1>
+                <h1>List Trash Category</h1>
             </div>
         </div>
     </div>
@@ -26,14 +26,8 @@
 	    <tr>
 	        <td color='black' align='center'>{{$category->name}}</td>
 	        <td color='black' align='center'>{{$category->description}}</td>
-	        <td><a class="btn" href="{{ URL::to('categories/' . $category->id) }}">Show this Category</a></td>
-		    <td><a class="btn" href="{{ URL::to('categories/' . $category->id . '/edit') }}">Edit this Category</a></td>
-	    	<td>{{ Form::open(array('url' => 'categories/' . $category->id)) }}
-	        	{{ Form::hidden('_method', 'DELETE') }}
-	        	{{ Form::submit('Delete this Category', array('class' => 'btn btn-warning')) }}
-	    		{{ Form::close() }}	
-	    		</td>
-	    </tr>
+            <td><a class="btn" href="{{ URL::to('categories/' . $category->id . '/restore') }}">Restore this Category</a></td>
+            <td><a class="btn" href="{{ URL::to('categories/' . $category->id . '/forcedelete') }}">Delete this Category</a></td>
 	@endforeach
 
     </table>
@@ -43,8 +37,8 @@
 
 <!--CREATE-->
     <br>
-	<a href="{{ URL::to('categories/create') }}" class="btn">Add new Category</a>
-    <a href = "{{URL::to('categories/trash')}}" class="btn">Trash</a>
+	<a href="{{ URL::to('categories') }}" class="btn">back to Category</a>
+    <a href = "{{URL::to('categories/restore')}}" class="btn">Restore All</a>
 @stop
 
 <hr>

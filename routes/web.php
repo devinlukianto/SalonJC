@@ -56,5 +56,8 @@ Route::resource('news', 'NewsController');
 Route::resource('comment', 'CommentController');
 
 //ROUTE UNTUK KATEGORI
+Route::get('categories/{id}/restore','CategoryController@restore');
+Route::get('categories/restore','CategoryController@restoreAll');
+Route::get('categories/trash','CategoryController@showTrash');
+Route::get('categories/{id}/forcedelete','CategoryController@forceDelete');
 Route::resource('categories','CategoryController');
-Route::get('restore','CategoryController@undo');

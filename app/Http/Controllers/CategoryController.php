@@ -143,9 +143,28 @@ class CategoryController extends Controller
         return Redirect::to('categories');
     }
 
-    public function undo(){
+    public function restoreAll(){
         $categories = Category::onlyTrashed()->restore();
 
         return Redirect::to('categories');
+    }
+
+    public function showTrash(){
+        $categories = Category::onlyTrashed()->paginate(5);
+
+        return view('category.trash', ['categories'=>$categories]);
+    }
+
+    public function restore($id){
+        $categories = Category::onlyTrashed()->find($id)->restore();
+
+        return Redirect::to('categories');
+    }
+
+    public function forceDelete($id) {
+        $category = Category::onlyTrashed()->find($id)->forceDelete();
+        $categories = Category::onlyTrashed()->paginate(5);
+
+        return view('category.trash', ['categories'=>$categories]);
     }
 }
