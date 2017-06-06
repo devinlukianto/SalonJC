@@ -36,7 +36,7 @@
         }
         
         .navbaralign {
-            margin-left: 14%;
+            margin-left: 10%;
             text-align: center;
         }
         
@@ -80,6 +80,8 @@
                                             <ul class="nav">
                                                 <li class="{{$nav_home or ''}}"><a href="{{route('homeroute')}}">HOME</a></li>
                                                 <li><a>|</a></li>
+                                                <li class="{{$nav_news or ''}}"><a href="{{URL::to('news')}}">NEWS</a></li>
+                                                <li><a>|</a></li>
                                                 <li class="{{$nav_product or ''}}"><a href="{{route('catalogue')}}">OUR PRODUCT</a></li>
                                                 <li><a>|</a></li>
                                                 <li class="{{$nav_about or ''}}"><a href="{{route('aboutus')}}">ABOUT US</a></li>
@@ -121,6 +123,7 @@
         @endif
 
         <div class="container">
+        <br>
             @yield('content')
         </div>
         <br><br>
