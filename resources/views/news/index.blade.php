@@ -68,6 +68,7 @@
                             {{ Form::close() }}
                         @endif
                     </div>
+                    <div>Last updated: {{ $value->updated_at}}</div>
                 </div>
             </div>
         </div>

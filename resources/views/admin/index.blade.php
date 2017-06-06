@@ -19,13 +19,13 @@
             </div>
 
             <div class="span4">
-                <a href="{{URL::to('admin/home')}}">
+                <a href="{{URL::to('brands')}}">
                     <h3>Manage Brand</h3>
                 </a>
             </div>
 
             <div class="span4">
-                <a href="{{URL::to('admin/home')}}">
+                <a href="{{URL::to('categories')}}">
                     <h3>Manage Category</h3>
                 </a>
             </div>

@@ -17,7 +17,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = News::paginate(3);
+        $news = News::orderBy('updated_at', 'desc')->paginate(3);
         $isTrash = 0;
         return view('news.index')
             ->with('news', $news)
@@ -70,7 +70,7 @@ class NewsController extends Controller
      */
     public function show($id)
     {
-        $news = News::find($id);
+        $news = News::withTrashed()->find($id);
         $comment = $news->comments()->get();
 
         return view('news.show')
@@ -141,7 +141,7 @@ class NewsController extends Controller
     /*SOFT DELETES FUNCTION*/
     public function getTrash()
     {
-        $news = News::onlyTrashed()->paginate(3);
+        $news = News::onlyTrashed()->orderBy('updated_at', 'desc')->paginate(3);
         $isTrash = 1;
         return view('news.index')
             ->with('news', $news)
