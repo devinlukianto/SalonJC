@@ -31,6 +31,7 @@ class AddForeignkeyCategoriesProducts extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             //
+            $table->dropForeign('products_category_id_foreign');
             $table->dropColumn('category_id');
         });
     }
