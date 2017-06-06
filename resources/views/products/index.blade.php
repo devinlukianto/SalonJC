@@ -50,12 +50,15 @@
 	    	<td>{{ Form::open(array('url' => 'products/' . $product->id)) }}
 	        	{{ Form::hidden('_method', 'DELETE') }}
 	        	{{ Form::submit('Delete this Product', array('class' => 'btn btn-warning')) }}
-	    		{{ Form::close() }}	
+	    		{{ Form::close() }}
 	    		</td>
 	    </tr>
 	@endforeach
-
     </table>
+
+    <div class="pagination" align="center">
+    {{ $products->links() }}
+    </div>
 
 <!--CREATE-->
     <br>
