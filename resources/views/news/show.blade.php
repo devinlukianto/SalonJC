@@ -5,7 +5,10 @@
 @section('title', "$news->title" . ' (Admin)')
 
 @section('content')
-
+	<div align="right">	
+		<a href="{{ URL::to('news') }}">Back to News Page</a>
+	</div>
+	
     <h1>{{ $news->title }}</h1>
 
     <div>
