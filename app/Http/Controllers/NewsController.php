@@ -18,9 +18,10 @@ class NewsController extends Controller
     public function index()
     {
         $news = News::paginate(3);
-
+        $isTrash = 0;
         return view('news.index')
-            ->with('news', $news);
+            ->with('news', $news)
+            ->with('isTrash', $isTrash);
     }
 
     /**
@@ -131,8 +132,31 @@ class NewsController extends Controller
     public function destroy($id)
     {
         $news = News::find($id);
+        //Delete overridden with soft delete function
         $news->delete();
 
         return redirect('news')->with('status', 'News successfully deleted');
+    }
+
+    /*SOFT DELETES FUNCTION*/
+    public function getTrash()
+    {
+        $news = News::onlyTrashed()->paginate(3);
+        $isTrash = 1;
+        return view('news.index')
+            ->with('news', $news)
+            ->with('isTrash', $isTrash);
+    }
+
+    public function restoreTrash($id)
+    {
+        $news = News::withTrashed()->find($id)->restore();
+        return redirect('news/trash')->with('status', 'News successfully restored');
+    }
+
+    public function removeTrash($id)
+    {
+        $news = News::withTrashed()->find($id)->forceDelete();
+        return redirect('news/trash')->with('status', 'News permanently removed');
     }
 }
