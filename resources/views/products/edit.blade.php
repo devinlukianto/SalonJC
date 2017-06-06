@@ -29,7 +29,10 @@
 	{{ Form::label('description','Description') }}
 	{{ Form::textarea('description', $product->description) }}
 <br>
-	{{ Form::label('brand','Choose brand') }}
+	{{ Form::label('category','Category') }}
+	{{ Form::select('category', $categories) }}
+<br>
+  {{ Form::label('brand','Choose brand') }}
 	{{ Form::select('brand_id', $brands, $product->brand_id ) }}
 	<a class="btn" href="{{ URL::to('brands/create') }}">Or create brands here</a>
 <br>

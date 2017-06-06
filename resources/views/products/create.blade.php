@@ -30,6 +30,9 @@
 	{{ Form::label('description','Description') }}
 	{{ Form::textarea('description', Input::old('description')) }}
 <br>
+	{{ Form::label('category','Category') }}
+	{{ Form::select('category', $categories) }}
+<br>
 	{{ Form::label('brand','Choose brand') }}
 	{{ Form::select('brand_id', $brands ) }}
 	<a class="btn" href="{{ URL::to('brands/create') }}">Or create brands here</a>

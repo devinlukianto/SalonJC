@@ -24,6 +24,7 @@
         <th color='black'> Stok </th>
         <th color='black'> Deskripsi </th>
         <th color='black'> Brand </th>
+        <th color='black'> Category </th>
         <th color='black' colspan="3"> Action </th>
     </tr>
 	@foreach($products as $product)
@@ -39,6 +40,11 @@
                 @endif
             @endforeach
             </td>
+            @foreach($categories as $category)
+                @if ($category->id == $product->id_category)
+                    <td color='black' align='center'>{{$category->name}}</td>
+                @endif
+            @endforeach
 	        <td><a class="btn" href="{{ URL::to('products/' . $product->id) }}">Show this Product</a></td>
 		    <td><a class="btn" href="{{ URL::to('products/' . $product->id . '/edit') }}">Edit this Product</a></td>
 	    	<td>{{ Form::open(array('url' => 'products/' . $product->id)) }}

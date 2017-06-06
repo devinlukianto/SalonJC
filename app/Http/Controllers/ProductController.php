@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use App\Product;
 use App\Brand;
+use App\Category;
 
 class ProductController extends Controller
 {
@@ -22,9 +23,11 @@ class ProductController extends Controller
         //
         $products = Product::all();
         $brands = Brand::all();
+        $categories = Category::all();
         return view('products.index')
             ->with('products',$products)
-            ->with('brands',$brands);
+            ->with('brands',$brands)
+            ->with('categories',$categories);
     }
 
     /**
@@ -36,8 +39,10 @@ class ProductController extends Controller
     {
         //
         $brands = Brand::pluck('name', 'id');
+        $categories = Category::pluck('name','id');
         return view('products.create')
-            ->with('brands', $brands);
+            ->with('brands', $brands)
+            ->with('categories',$categories);
     }
 
     /**
@@ -53,7 +58,8 @@ class ProductController extends Controller
             'name'=>'required',
             'price'=>'required',
             'stock'=>'required',
-            'description'=>'required'
+            'description'=>'required',
+            'category'=> 'required'
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -69,6 +75,7 @@ class ProductController extends Controller
             $product->stock = Input::get('stock');
             $product->description = Input::get('description');
             $product->brand_id = Input::get('brand_id');
+            $product->category_id = Input::get('category');
             $product->save();
 
             return redirect('products');
@@ -87,9 +94,11 @@ class ProductController extends Controller
         $product = Product::find($id);
         //$brand = Brand::find($product->brand_id);
         $brand = $product->brand;
+        $category = $product->category;
         return view('products.show')
             ->with('product', $product)
-            ->with('brand', $brand);
+            ->with('brand', $brand)
+            ->with('category',$category);
     }
 
     /**
@@ -103,9 +112,11 @@ class ProductController extends Controller
         //
         $product = Product::find($id);
         $brands = Brand::pluck('name', 'id');
+        $categories = Category::pluck('name','id');
         return view('products.edit')
             ->with('product',$product)
-            ->with('brands', $brands);
+            ->with('brands', $brands)
+            ->with('categories',$categories);
     }
 
     /**
@@ -139,6 +150,7 @@ class ProductController extends Controller
             $product->stock = Input::get('stock');
             $product->description = Input::get('description');
             $product->brand_id = Input::get('brand_id');
+            $product->category_id = Input::get('category');
             $product->update();
 
             return redirect('products');

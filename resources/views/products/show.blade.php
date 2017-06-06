@@ -22,6 +22,8 @@
     <p>Stok saat ini:{{$product->stock}}</p>
     <hr>
     <p>{{$product->description}}</p>
+    <hr>
+        <p>Kategori : {{$category->name}}</p>
     <br><hr>
 @if($brand)
     <p>Brand: {{$brand->name}}</p>

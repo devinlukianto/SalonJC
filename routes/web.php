@@ -51,3 +51,9 @@ Route::get('login', 'LoginController@showPage')->name('loginget');
 Route::post('login', 'LoginController@doLogin')->name('loginpost');
 Route::get('logout', 'LoginController@doLogout')->name('logout');
 Route::get('guestlogin', 'LoginController@doGuest')->name('guestget');
+
+Route::resource('news', 'NewsController');
+Route::resource('comment', 'CommentController');
+
+//ROUTE UNTUK KATEGORI
+Route::resource('categories','CategoryController');
