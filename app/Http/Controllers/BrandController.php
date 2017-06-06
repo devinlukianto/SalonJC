@@ -44,10 +44,7 @@ class BrandController extends Controller
         //
         $rules = array(
             'name'=>'required',
-            'description'=>'required',
             'company'=>'required',
-            'company_phone'=>'required',
-            'company_address'=>'required'
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -57,12 +54,12 @@ class BrandController extends Controller
                 ->withErrors($validator)
                 ->withInput(Input::except('password'));
         } else {
-            $brand = new Brand;
-            $brand->name = Input::get('name');
+            $brand = new Brand(Input::all());
+/*            $brand->name = Input::get('name');
             $brand->description = Input::get('description');
             $brand->company = Input::get('company');
             $brand->company_phone = Input::get('company_phone');
-            $brand->company_address = Input::get('company_address');
+            $brand->company_address = Input::get('company_address');*/
             $brand->save();
 
             return redirect('brands');
@@ -109,10 +106,7 @@ class BrandController extends Controller
         //
         $rules = array(
             'name'=>'required',
-            'description'=>'required',
             'company'=>'required',
-            'company_phone'=>'required',
-            'company_address'=>'required'
         );
 
         $validator = Validator::make(Input::all(), $rules);

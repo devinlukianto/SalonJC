@@ -85,7 +85,8 @@ class ProductController extends Controller
     {
         //
         $product = Product::find($id);
-        $brand = Brand::find($product->brand_id);
+        //$brand = Brand::find($product->brand_id);
+        $brand = $product->brand;
         return view('products.show')
             ->with('product', $product)
             ->with('brand', $brand);

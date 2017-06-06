@@ -23,9 +23,15 @@
     <hr>
     <p>{{$product->description}}</p>
     <br><hr>
+@if($brand)
     <p>Brand: {{$brand->name}}</p>
     <p>{{$brand->description}}</p>
     <br><hr>
+@else
+    No brand for this bread<br>
+    <a class="btn" href="{{ URL::to('products/' . $product->id . '/edit') }}">Add brand</a>
+    <br><hr>
+@endif
     <a class="btn" href="{{ URL::to('products') }}">Back to product index</a>
     <a class="btn" href="{{ URL::to('products/' . $product->id . '/edit') }}">Edit this Product</a>
     {{ Form::open(array('url' => 'products/' . $product->id, 'class' => 'pull-right')) }}

@@ -30,6 +30,7 @@ class AddForeignKeyToBrand extends Migration
         //
         Schema::table('products', function (Blueprint $table) {
             $table->dropForeign('products_brand_id_foreign');
+            $table->dropColumn('brand_id');
         });
     }
 }
