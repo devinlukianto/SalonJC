@@ -29,6 +29,9 @@
 	{{ Form::label('description','Description') }}
 	{{ Form::textarea('description', $product->description) }}
 <br>
+	{{ Form::label('category','Category') }}
+	{{ Form::select('category', $categories) }}
+<br>
 	{{ Form::submit('Edit product', array('class'=>'btn')) }}
 
 {{ Form::close() }}
