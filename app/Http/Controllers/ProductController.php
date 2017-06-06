@@ -7,9 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
-use App\Product;
-use App\Brand;
-use App\Category;
+use App\Models\Product;
+use App\Models\Brand;
+use App\Models\Category;
 
 class ProductController extends Controller
 {
