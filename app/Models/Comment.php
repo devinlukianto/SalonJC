@@ -6,8 +6,11 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Comment extends Eloquent
 {
-	 public function news()
-     {
-        return $this->hasOne('App\Models\News');
-     }
+	protected $table = 'comments';
+    protected $fillable = ['content'];
+
+	public function news()
+	{
+		return $this->belongsTo('App\Models\News');
+	}
 }
