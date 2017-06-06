@@ -24,8 +24,8 @@
     </tr>
 	@foreach($categories as $category)
 	    <tr>
-	        <td color='black' align='center'>{{$category->nama}}</td>
-	        <td color='black' align='center'>{{$category->deskripsi}}</td>
+	        <td color='black' align='center'>{{$category->name}}</td>
+	        <td color='black' align='center'>{{$category->description}}</td>
 	        <td><a class="btn" href="{{ URL::to('categories/' . $category->id) }}">Show this Category</a></td>
 		    <td><a class="btn" href="{{ URL::to('categories/' . $category->id . '/edit') }}">Edit this Category</a></td>
 	    	<td>{{ Form::open(array('url' => 'categories/' . $category->id)) }}

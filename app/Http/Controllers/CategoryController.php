@@ -45,8 +45,7 @@ class CategoryController extends Controller
     {
         //
         $rules = array(
-            'nama'       => 'required',
-            'deskripsi'    => 'required',
+            'name'       => 'required',
         );
         $validator = Validator::make(Input::all(), $rules);
 
@@ -57,8 +56,8 @@ class CategoryController extends Controller
         } else {
             // store
             $category = new Category;
-            $category->nama  = Input::get('nama');
-            $category->deskripsi = Input::get('deskripsi');
+            $category->name  = Input::get('name');
+            $category->description = Input::get('description');
             $category->save();
 
             // redirect
@@ -105,8 +104,7 @@ class CategoryController extends Controller
     {
         //
         $rules = array(
-            'nama'       => 'required',
-            'deskripsi'    => 'required',
+            'name'       => 'required',
         );
         $validator = Validator::make(Input::all(), $rules);
 
@@ -118,8 +116,8 @@ class CategoryController extends Controller
         } else {
             // store
             $category = Category::find($id);
-            $category->nama       = Input::get('nama');
-            $category->deskripsi       = Input::get('deskripsi');
+            $category->name       = Input::get('name');
+            $category->description       = Input::get('description');
             $category->save();
 
             // redirect

@@ -33,7 +33,7 @@ class ProductController extends Controller
     public function create()
     {
         //
-        $categories = Category::pluck('nama','id');
+        $categories = Category::pluck('name','id');
 
         return view('products.create', ['categories'=>$categories]);
     }
@@ -67,7 +67,7 @@ class ProductController extends Controller
             $product->price = Input::get('price');
             $product->stock = Input::get('stock');
             $product->description = Input::get('description');
-            $product->id_category = Input::get('category');
+            $product->category_id = Input::get('category');
             $product->save();
 
             return redirect('products');
@@ -84,7 +84,7 @@ class ProductController extends Controller
     {
         //
         $product = Product::find($id);
-        $category = $product->category()->get();
+        $category = $product->category;
         return view('products.show')->with('product',$product)->with('category',$category);
     }
 
@@ -98,7 +98,7 @@ class ProductController extends Controller
     {
         //
         $product = Product::find($id);
-        $categories = Category::pluck('nama','id');
+        $categories = Category::pluck('name','id');
         return view('products.edit')->with('product',$product)->with('categories',$categories);
     }
 
@@ -132,6 +132,7 @@ class ProductController extends Controller
             $product->price = Input::get('price');
             $product->stock = Input::get('stock');
             $product->description = Input::get('description');
+            $product->category_id = Input::get('category');
             $product->update();
 
             return redirect('products');

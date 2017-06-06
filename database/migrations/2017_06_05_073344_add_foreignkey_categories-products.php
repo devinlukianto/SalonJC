@@ -15,8 +15,8 @@ class AddForeignkeyCategoriesProducts extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             //
-            $table->unsignedInteger('id_category');
-            $table->foreign('id_category')
+            $table->unsignedInteger('category_id');
+            $table->foreign('category_id')
                     ->references('id')->on('categories')
                     ->onDelete('cascade');
         });
@@ -31,6 +31,7 @@ class AddForeignkeyCategoriesProducts extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             //
+            $table->dropColumn('category_id');
         });
     }
 }

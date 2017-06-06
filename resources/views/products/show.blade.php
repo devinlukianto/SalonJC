@@ -23,7 +23,7 @@
     <hr>
     <p>{{$product->description}}</p>
     <hr>
-        <p>Kategori : {{$category[0]->nama}}</p>
+        <p>Kategori : {{$category->name}}</p>
     <br><hr>
     <a class="btn" href="{{ URL::to('products') }}">Back to product index</a>
     <a class="btn" href="{{ URL::to('products/' . $product->id . '/edit') }}">Edit this Product</a>

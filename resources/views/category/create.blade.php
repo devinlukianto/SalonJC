@@ -15,14 +15,21 @@
         </div>
     </div>
 
+    @if($errors->any())
+        <div class="alert alert-danger">
+        @foreach($errors->all() as $err)
+            <li><span>{{ $err }}</li>
+        @endforeach
+        </div>
+    @endif
 
 {{ Form::open(array('url' => 'categories')) }}
 
-	{{ Form::label('nama','Nama') }}
-	{{ Form::text('nama', Input::old('nama')) }}
+	{{ Form::label('name','Nama') }}
+	{{ Form::text('name', Input::old('name')) }}
 <br>
-	{{ Form::label('deskripsi','Deskripsi') }}
-	{{ Form::textarea('deskripsi', Input::old('deskripsi')) }}
+	{{ Form::label('description','Deskripsi') }}
+	{{ Form::textarea('description', Input::old('description')) }}
 <br>
 	{{ Form::submit('Create category') }}
 

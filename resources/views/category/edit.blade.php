@@ -17,11 +17,11 @@
 
 {{ Form::model($category, array('route' => array('categories.update', $category->id), 'method'=>'PUT')) }}
 
-	{{ Form::label('nama','Nama') }}
-	{{ Form::text('nama', $category->nama) }}
+	{{ Form::label('name','Nama') }}
+	{{ Form::text('name', $category->name) }}
 <br>
-	{{ Form::label('deskripsi','Deskripsi') }}
-	{{ Form::textarea('deskripsi', $category->deskripsi) }}
+	{{ Form::label('description','Deskripsi') }}
+	{{ Form::textarea('description', $category->description) }}
 <br>
 	{{ Form::submit('Edit category', array('class'=>'btn')) }}
 

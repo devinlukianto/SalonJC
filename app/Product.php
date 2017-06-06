@@ -8,6 +8,6 @@ class Product extends Model
 {
     //
     public function category(){
-    	return $this->hasOne('App\Category', 'id', 'id_category');
+    	return $this->belongsTo('App\Category' );
     }
 }

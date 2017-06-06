@@ -34,7 +34,7 @@
 	        <td color='black' align='center'>{{$product->description}}</td>
             @foreach($categories as $category)
                 @if ($category->id == $product->id_category)
-                    <td color='black' align='center'>{{$category->nama}}</td>
+                    <td color='black' align='center'>{{$category->name}}</td>
                 @endif
             @endforeach
 	        <td><a class="btn" href="{{ URL::to('products/' . $product->id) }}">Show this Product</a></td>
