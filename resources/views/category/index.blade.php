@@ -39,10 +39,6 @@
     
 
     <div class = 'pagination' align = 'center'>{{ $categories->links() }}</div>
-
-    <div class = 'pagination' align = 'center'>{{ $categories->links() }}</div>
-
-<!--CREATE-->
     <br>
 	<a href="{{ URL::to('categories/create') }}" class="btn">Add new Category</a>
     <a href = "{{URL::to('categories/trash')}}" class="btn">Trash</a>
