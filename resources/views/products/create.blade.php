@@ -33,6 +33,10 @@
 	{{ Form::label('category','Category') }}
 	{{ Form::select('category', $categories) }}
 <br>
+	{{ Form::label('brand','Choose brand') }}
+	{{ Form::select('brand_id', $brands ) }}
+	<a class="btn" href="{{ URL::to('brands/create') }}">Or create brands here</a>
+<br>
 	{{ Form::submit('Create product') }}
 
 {{ Form::close() }}

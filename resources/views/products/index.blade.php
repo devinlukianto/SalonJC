@@ -23,6 +23,7 @@
         <th color='black'> Harga </th>
         <th color='black'> Stok </th>
         <th color='black'> Deskripsi </th>
+        <th color='black'> Brand </th>
         <th color='black'> Category </th>
         <th color='black' colspan="3"> Action </th>
     </tr>
@@ -32,6 +33,13 @@
 	        <td color='black' align='center'>{{$product->price}}</td>
 	        <td color='black' align='center'>{{$product->stock}}</td>
 	        <td color='black' align='center'>{{$product->description}}</td>
+            <td color='black' align='center'>
+            @foreach($brands as $brand)
+                @if($brand->id == $product->brand_id)
+                    {{$brand->name}}<br>
+                @endif
+            @endforeach
+            </td>
             @foreach($categories as $category)
                 @if ($category->id == $product->id_category)
                     <td color='black' align='center'>{{$category->name}}</td>
