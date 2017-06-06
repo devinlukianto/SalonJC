@@ -69,7 +69,11 @@ Route::get('addproduct', [
     'as' => 'addproduct'
 ]);
 
-//JOVIAN sampe sini
-
+//ROUTE UNTUK NEWS DAN COMMENT
 Route::resource('news', 'NewsController');
 Route::resource('comment', 'CommentController');
+
+//ROUTE ADMIN
+Route::get('admin/home', function () {
+    return view('admin.index');
+})->name('adminhome');

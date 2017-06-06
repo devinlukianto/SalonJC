@@ -63,7 +63,7 @@
                 <div class="container">
                     <div class="row centeralign">
                         <!--LOGO-->
-                        <div class="span12"><a class="brand" href="index.html"><img width="20%" src="{{URL::asset('img/bariton.png')}}"/></a></div>
+                        <div class="span12"><a class="brand" href="{{route('homeroute')}}"><img width="20%" src="{{URL::asset('img/bariton.png')}}"/></a></div>
 
                         <!-- MAIN NAVIGATION --> 
                         <div class="navbaralign">
@@ -78,7 +78,11 @@
                                         @section('navbar')
                                         <div class="nav-collapse collapse navbar-responsive-collapse menufontsize">
                                             <ul class="nav">
-                                                <li class="{{$nav_home or ''}}"><a href="{{route('homeroute')}}">HOME</a></li>
+                                                @if (Auth::check())
+                                                    <li class="{{$nav_home or ''}}"><a href="{{route('adminhome')}}">HOME</a></li>
+                                                @else
+                                                    <li class="{{$nav_home or ''}}"><a href="{{route('homeroute')}}">HOME</a></li>
+                                                @endif
                                                 <li><a>|</a></li>
                                                 <li class="{{$nav_news or ''}}"><a href="{{URL::to('news')}}">NEWS</a></li>
                                                 <li><a>|</a></li>

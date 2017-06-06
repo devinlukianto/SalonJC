@@ -19,8 +19,10 @@
 
 @section('content')
     <h1>News</h1>
-    <a href="{{ URL::to('news/create') }}">Create News</a>
-    <br><br><br>
+    @if (Auth::check())
+        <a href="{{ URL::to('news/create') }}">Create News</a>
+        <br><br><br>
+    @endif
 
     @if (Session::has('message'))
         <div class="alert alert-info">{{ Session::get('message') }}</div>
@@ -39,15 +41,22 @@
                     <p>{{ $value->content }}</p>
                     <div>
                         <a class="btn btn-small btn-success" href="{{ URL::to('news/' . $value->id) }}">View</a>
-                        <a class="btn btn-small btn-info" href="{{ URL::to('news/' . $value->id . '/edit') }}">Edit</a>
-                        {{ Form::open(array('url' => 'news/' . $value->id, 'class' => 'pull-right'))}}
-                        {{ Form::hidden('_method', 'DELETE') }}
-                        {{ Form::submit('Delete', array('class' => 'btn btn-small')) }}
-                        {{ Form::close() }}
+                        @if (Auth::check())
+                            <a class="btn btn-small btn-info" href="{{ URL::to('news/' . $value->id . '/edit') }}">Edit</a>
+                            {{ Form::open(array('url' => 'news/' . $value->id, 'class' => 'pull-right'))}}
+                            {{ Form::hidden('_method', 'DELETE') }}
+                            {{ Form::submit('Delete', array('class' => 'btn btn-small')) }}
+                            {{ Form::close() }}
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
     @endforeach
+
+    <div class="pagination" align="center">
+        {{ $news->links() }}
+    </div>
+
 @stop

@@ -23,7 +23,7 @@ class LoginController extends Controller
 
         if (Auth::attempt(['email' => $user->email, 'password' => $user->password])) {
             // Authentication passed...
-            return redirect('home')->with('status', 'You are logged in');
+            return redirect('admin/home')->with('status', 'You are logged in as administrator');
         } else {
             return redirect('login')->with('status', 'Please insert correct combination of email and password!');
         }

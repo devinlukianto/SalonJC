@@ -1,5 +1,7 @@
 <h2>Comment and Testimonials</h2>
 
+@if (Auth::check())
+
 <table width="50%" border="1">
     <tr>
         <th width="75%">Comment</th>
@@ -20,3 +22,19 @@
         </tr>
     @endforeach
 </table>
+
+@else
+
+<table width="40%" border="1">
+    <tr>
+        <th>Comment</th>
+    </tr>
+
+    @foreach($comment as $key => $value)
+        <tr>
+            <td>{{ $value->content }}</td>
+        </tr>
+    @endforeach
+</table>
+
+@endif
