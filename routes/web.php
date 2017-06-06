@@ -37,6 +37,10 @@ Route::get('produk/{id}', 'PageController@fetchproduct')->name('produk');
 
 //ROUTE UNTUK REGISTER
 
+Route::delete('products/{id}/delete', 'ProductController@deletepermanent');
+Route::get('products/{id}/restore', 'ProductController@restore');
+Route::get('products/{id}/showtrash', 'ProductController@showtrash');
+Route::get('products/trash', 'ProductController@trash');
 //ROUTE UNTUK CRUD PRODUK
 Route::resource('products','ProductController');
 

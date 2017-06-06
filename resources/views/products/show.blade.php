@@ -34,10 +34,20 @@
     <a class="btn" href="{{ URL::to('products/' . $product->id . '/edit') }}">Add brand</a>
     <br><hr>
 @endif
+
+@if(isset($is_trash))
+    <a class="btn" href="{{ URL::to('products/trash') }}">Back to product trash index</a>
+    <a class="btn" href="{{ URL::to('products/' . $product->id . '/restore') }}">Restore this Product</a>
+    {{ Form::open(array('url' => 'products/' . $product->id . '/delete', 'class' => 'pull-right')) }}
+        {{ Form::hidden('_method', 'DELETE') }}
+        {{ Form::submit('Delete this Product Permanently', array('class' => 'btn btn-warning')) }}
+    {{ Form::close() }}
+@else
     <a class="btn" href="{{ URL::to('products') }}">Back to product index</a>
     <a class="btn" href="{{ URL::to('products/' . $product->id . '/edit') }}">Edit this Product</a>
     {{ Form::open(array('url' => 'products/' . $product->id, 'class' => 'pull-right')) }}
         {{ Form::hidden('_method', 'DELETE') }}
         {{ Form::submit('Delete this Product', array('class' => 'btn btn-warning')) }}
     {{ Form::close() }}
+@endif
 @stop

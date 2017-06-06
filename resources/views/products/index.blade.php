@@ -11,6 +11,8 @@
         <div class="span12">
             <div class="page-header">
                 <h1>List Product</h1>
+                <h4><a href="{{ URL::to('products')}}">List Product</a> | <a href="{{ URL::to('products/trash')}}">List Deleted Product</a>
+                </h4>
             </div>
         </div>
     </div>
@@ -45,6 +47,15 @@
                     <td color='black' align='center'>{{$category->name}}</td>
                 @endif
             @endforeach
+            @if($is_trash==1)
+            <td><a class="btn" href="{{ URL::to('products/' . $product->id . '/showtrash') }}">Show this Product</a></td>
+            <td><a class="btn" href="{{ URL::to('products/' . $product->id . '/restore') }}">Restore this Product</a></td>
+            <td>{{ Form::open(array('url' => 'products/' . $product->id . '/delete')) }}
+                {{ Form::hidden('_method', 'DELETE') }}
+                {{ Form::submit('Delete this Product Permanently', array('class' => 'btn btn-warning')) }}
+                {{ Form::close() }}
+                </td>
+            @else
 	        <td><a class="btn" href="{{ URL::to('products/' . $product->id) }}">Show this Product</a></td>
 		    <td><a class="btn" href="{{ URL::to('products/' . $product->id . '/edit') }}">Edit this Product</a></td>
 	    	<td>{{ Form::open(array('url' => 'products/' . $product->id)) }}
@@ -52,6 +63,7 @@
 	        	{{ Form::submit('Delete this Product', array('class' => 'btn btn-warning')) }}
 	    		{{ Form::close() }}
 	    		</td>
+            @endif
 	    </tr>
 	@endforeach
     </table>

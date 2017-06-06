@@ -24,10 +24,12 @@ class ProductController extends Controller
         $products = Product::paginate(3);
         $brands = Brand::all();
         $categories = Category::all();
+        $is_trash = 0;
         return view('products.index')
             ->with('products',$products)
             ->with('brands',$brands)
-            ->with('categories',$categories);
+            ->with('categories',$categories)
+            ->with('is_trash',$is_trash);
     }
 
     /**
@@ -171,5 +173,55 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect('products');
+    }
+
+    public function trash()
+    {
+        $products = Product::onlyTrashed()->paginate(3);
+        $brands = Brand::all();
+        $categories = Category::all();
+        $is_trash = 1;
+        return view('products.index')
+            ->with('products',$products)
+            ->with('brands',$brands)
+            ->with('categories',$categories)
+            ->with('is_trash',$is_trash);
+    }
+
+    public function restore($id)
+    {
+        $product = Product::onlyTrashed()->find($id);
+        $product->restore();
+
+        
+        return redirect('products');
+    }
+
+    public function deletepermanent($id)
+    {
+        $product = Product::withTrashed()->find($id);
+        $product->forceDelete();
+        $products = Product::onlyTrashed()->paginate(3);
+        $brands = Brand::all();
+        $categories = Category::all();
+        $is_trash = 1;
+        return view('products.index')
+            ->with('products',$products)
+            ->with('brands',$brands)
+            ->with('categories',$categories)
+            ->with('is_trash',$is_trash);
+    }
+
+    public function showtrash($id)
+    {
+        $product = Product::onlyTrashed()->find($id);
+        $brand = $product->brand;
+        $category = $product->category;
+        $is_trash = 1;
+        return view('products.show')
+            ->with('product',$product)
+            ->with('brand',$brand)
+            ->with('category',$category)
+            ->with('is_trash',$is_trash);
     }
 }
