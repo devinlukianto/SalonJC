@@ -37,10 +37,14 @@
 	@endforeach
 
     </table>
+    
+
+    <div class = 'pagination' align = 'center'>{{ $categories->links() }}</div>
 
 <!--CREATE-->
     <br>
 	<a href="{{ URL::to('categories/create') }}" class="btn">Add new Category</a>
+    <a href = "{{URL::to('restore')}}" class="btn">Restore</a>
 @stop
 
 <hr>

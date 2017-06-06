@@ -19,7 +19,7 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        $categories = Category::all();
+        $categories = Category::paginate(5);
 
         return view('category.index', ['categories'=>$categories]);
     }
@@ -140,6 +140,12 @@ class CategoryController extends Controller
 
         // redirect
         Session::flash('message', 'Successfully deleted the category!');
+        return Redirect::to('categories');
+    }
+
+    public function undo(){
+        $categories = Category::onlyTrashed()->restore();
+
         return Redirect::to('categories');
     }
 }

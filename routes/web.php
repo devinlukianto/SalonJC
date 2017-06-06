@@ -57,3 +57,4 @@ Route::resource('comment', 'CommentController');
 
 //ROUTE UNTUK KATEGORI
 Route::resource('categories','CategoryController');
+Route::get('restore','CategoryController@undo');
