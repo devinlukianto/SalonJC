@@ -50,16 +50,14 @@
             @if($is_trash==1)
             <td><a class="btn" href="{{ URL::to('products/' . $product->id . '/showtrash') }}">Show this Product</a></td>
             <td><a class="btn" href="{{ URL::to('products/' . $product->id . '/restore') }}">Restore this Product</a></td>
-            <td>{{ Form::open(array('url' => 'products/' . $product->id . '/delete')) }}
-                {{ Form::hidden('_method', 'DELETE') }}
+            <td>{{ Form::open(array('url' => 'products/' . $product->id . '/delete', 'method'=> 'DELETE')) }}
                 {{ Form::submit('Delete this Product Permanently', array('class' => 'btn btn-warning')) }}
                 {{ Form::close() }}
                 </td>
             @else
 	        <td><a class="btn" href="{{ URL::to('products/' . $product->id) }}">Show this Product</a></td>
 		    <td><a class="btn" href="{{ URL::to('products/' . $product->id . '/edit') }}">Edit this Product</a></td>
-	    	<td>{{ Form::open(array('url' => 'products/' . $product->id)) }}
-	        	{{ Form::hidden('_method', 'DELETE') }}
+	    	<td>{{ Form::open(array('url' => 'products/' . $product->id, 'method'=>'DELETE')) }}
 	        	{{ Form::submit('Delete this Product', array('class' => 'btn btn-warning')) }}
 	    		{{ Form::close() }}
 	    		</td>

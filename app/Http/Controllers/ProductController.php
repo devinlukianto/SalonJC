@@ -201,15 +201,8 @@ class ProductController extends Controller
     {
         $product = Product::withTrashed()->find($id);
         $product->forceDelete();
-        $products = Product::onlyTrashed()->paginate(3);
-        $brands = Brand::all();
-        $categories = Category::all();
-        $is_trash = 1;
-        return view('products.index')
-            ->with('products',$products)
-            ->with('brands',$brands)
-            ->with('categories',$categories)
-            ->with('is_trash',$is_trash);
+
+        return redirect('products/trash');
     }
 
     public function showtrash($id)
