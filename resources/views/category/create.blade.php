@@ -34,6 +34,6 @@
 	{{ Form::submit('Create category') }}
 
 {{ Form::close() }}
-    <a href="{{ URL::to('categories') }}">Back to category index</a>
+    <a href="{{ route('categories.index') }}">Back to category index</a>
 
 @stop

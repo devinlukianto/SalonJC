@@ -26,6 +26,6 @@
 	{{ Form::submit('Edit category', array('class'=>'btn')) }}
 
 {{ Form::close() }}
-    <a class="btn" href="{{ URL::to('categories') }}">Back to category index</a>
-	<a class="btn" href="{{ URL::to('categories/' . $category->id) }}">Back to show category</a>
+    <a class="btn" href="{{ route('categories.index') }}">Back to category index</a>
+	<a class="btn" href="{{ route('categories.show', ['id' => $category->id]) }}">Back to show category</a>
 @stop

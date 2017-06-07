@@ -37,7 +37,7 @@
 
 <!--CREATE-->
     <br>
-	<a href="{{ URL::to('categories') }}" class="btn">back to Category</a>
+	<a href="{{ route('categories.index') }}" class="btn">back to Category</a>
     <a href = "{{ route('category.restoreall') }}" class="btn">Restore All</a>
 @stop
 

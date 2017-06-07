@@ -51,7 +51,7 @@ class CategoryController extends Controller
 
         // process the login
         if ($validator->fails()) {
-            return Redirect::to('categories/create')
+            return redirect()->route('categories.create')
                 ->withErrors($validator);
         } else {
             // store
@@ -62,7 +62,7 @@ class CategoryController extends Controller
 
             // redirect
             Session::flash('message', 'Successfully created nerd!');
-            return Redirect::to('categories');
+            return redirect()->route('categories.index');
         }
     }
 
@@ -122,7 +122,7 @@ class CategoryController extends Controller
 
             // redirect
             Session::flash('message', 'Successfully updated category!');
-            return Redirect::to('categories');
+            return redirect()->route('categories.index');
         }
     }
 
@@ -140,13 +140,13 @@ class CategoryController extends Controller
 
         // redirect
         Session::flash('message', 'Successfully deleted the category!');
-        return Redirect::to('categories');
+        return redirect()->route('categories.index');
     }
 
     public function restoreAll(){
         $categories = Category::onlyTrashed()->restore();
 
-        return Redirect::to('categories');
+        return redirect()->route('categories.index');
     }
 
     public function showTrash(){
@@ -158,7 +158,7 @@ class CategoryController extends Controller
     public function restore($id){
         $categories = Category::onlyTrashed()->find($id)->restore();
 
-        return Redirect::to('categories');
+        return redirect()->route('categories.index');
     }
 
     public function forceDelete($id) {
