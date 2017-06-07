@@ -29,6 +29,6 @@ class RegisterController extends Controller
         $user->telepon  = Input::get('telepon');
         $user->save();
 
-        return redirect('home')->with('status', 'Register successful, please login to proceed!');
+        return redirect()->route('homeroute')->with('status', 'Register success! Please login to use your account');
     }
 }

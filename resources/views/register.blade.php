@@ -20,6 +20,7 @@
         </div>
     </div>
     <!-- /. PAGE TITLE-->
+    
     @if($errors->any())
         <div class="alert alert-danger">
         @foreach($errors->all() as $err)
@@ -29,7 +30,7 @@
     @endif
 
     <div class="row">
-        <form class="form-horizontal span12" method="POST" action="{{route('registerpost')}}">
+        <form class="form-horizontal span12" method="POST" action="{{ route('registerpost') }}">
             <div class="span12">
                 <label class="control-label span5">Nama Lengkap: </label>
                 <div class="span7">

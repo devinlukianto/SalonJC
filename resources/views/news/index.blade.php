@@ -27,12 +27,12 @@
     @if (Auth::check())
         <nav class="navbar">
             <ul class="nav">
-                <li><a href="{{ URL::to('news/create') }}">Create News</a></li>
+                <li><a href="{{ route('news.create') }}">Create News</a></li>
                 <li><a>|</a></li>
                 @if ($isTrash == 1)
-                    <li><a href="{{ URL::to('news') }}">News List</a></li>
+                    <li><a href="{{ route('news.index') }}">News List</a></li>
                 @else
-                    <li><a href="{{ URL::to('news/trash') }}">Recycle Bin</a></li>
+                    <li><a href="{{ route('newstrashindex') }}">Recycle Bin</a></li>
                 @endif
             </ul>
         </nav>
@@ -49,7 +49,7 @@
             <div class="span11">
                 <div class="media-body">
                     <br>
-                    <a href="{{ URL::to('news/' . $value->id) }}">
+                    <a href="{{ route('news.show', ['id' => $value->id]) }}">
                         <h4 class="rotifontsize">{{ $value->title }}</h4>
                     </a>
                     <p>{{ $value->content }}</p>
@@ -58,17 +58,17 @@
                         @if (Auth::check())
                             {{ Form::open(array('url' => 'news/' . $value->id, 'class' => 'pull-right'))}}
                             @if ($isTrash == 0)
-                                <a class="btn btn-large btn-info" href="{{ URL::to('news/' . $value->id . '/edit') }}">Edit</a>
+                                <a class="btn btn-large btn-info" href="{{ route('news.edit', ['id' => $value->id]) }}">Edit</a>
                                 {{ Form::hidden('_method', 'DELETE') }}
                                 {{ Form::submit('Remove', array('class' => 'btn btn-large btn-danger')) }}
                             @else
-                                <a class="btn btn-large btn-info" href="{{ URL::to('news/' . $value->id . '/restore') }}">Restore</a>
-                                <a class="btn btn-large btn-danger" href="{{ URL::to('news/' . $value->id . '/remove') }}">Delete</a>
+                                <a class="btn btn-large btn-info" href="{{ route('newsrestore', ['id' => $value->id]) }}">Restore</a>
+                                <a class="btn btn-large btn-danger" href="{{ route('newsremove', ['id' => $value->id]) }}">Delete</a>
                             @endif
                             {{ Form::close() }}
                         @endif
                     </div>
-                    <div>Last updated: {{ $value->updated_at}}</div>
+                    <div>Last updated: {{ $value->updated_at }}</div>
                 </div>
             </div>
         </div>

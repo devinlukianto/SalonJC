@@ -4,7 +4,7 @@
 
 @if (Auth::check())
 
-@section('title', 'Edit News (Admin)')
+    @section('title', 'Edit News (Admin)')
 
     @section('content')
         <h1>Edit {{ $news->name }}</h1>

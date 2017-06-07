@@ -13,19 +13,19 @@
             </div>
 
             <div class="span4">
-                <a href="{{URL::to('news')}}">
+                <a href="{{ route('news.index') }}">
                     <h3>Manage News</h3>
                 </a>
             </div>
 
             <div class="span4">
-                <a href="{{URL::to('brands')}}">
+                <a href="{{ route('brands.index') }}">
                     <h3>Manage Brand</h3>
                 </a>
             </div>
 
             <div class="span4">
-                <a href="{{URL::to('categories')}}">
+                <a href="{{ route('categories.index') }}">
                     <h3>Manage Category</h3>
                 </a>
             </div>

@@ -50,7 +50,10 @@ class NewsController extends Controller
         $validator = Validator::make(Input::all(), $rules);
 
         if ($validator->fails()) {
-            return redirect('news/create')
+            return redirect()
+                ->route('news.create')
+                ->withErrors($validator)
+                ->withInput()
                 ->with('status', 'News failed to create');
         } else {
             $news = new News;
@@ -58,7 +61,7 @@ class NewsController extends Controller
             $news->content  = Input::get('content');
             $news->save();
 
-            return redirect('news')->with('status', 'News successfully created');
+            return redirect()->route('news.index')->with('status', 'News successfully created');
         }
     }
 
@@ -110,7 +113,10 @@ class NewsController extends Controller
 
         // process the login
         if ($validator->fails()) {
-            return redirect('news/' . $id . '/edit')
+            return redirect()
+                ->route('news.edit', ['id' => $id])
+                ->withErrors($validator)
+                ->withInput()
                 ->with('status', 'News failed to update');
         } else {
             // store
@@ -119,7 +125,7 @@ class NewsController extends Controller
             $news->content  = Input::get('content');
             $news->save();
 
-            return redirect('news')->with('status', 'News successfully updated');
+            return redirect()->route('news.index')->with('status', 'News successfully updated');
         }
     }
 
@@ -135,7 +141,7 @@ class NewsController extends Controller
         //Delete overridden with soft delete function
         $news->delete();
 
-        return redirect('news')->with('status', 'News successfully deleted');
+        return redirect()->route('news.index')->with('status', 'News successfully deleted');
     }
 
     /*SOFT DELETES FUNCTION*/
@@ -151,12 +157,12 @@ class NewsController extends Controller
     public function restoreTrash($id)
     {
         $news = News::withTrashed()->find($id)->restore();
-        return redirect('news/trash')->with('status', 'News successfully restored');
+        return redirect()->route('newstrashindex')->with('status', 'News successfully restored');
     }
 
     public function removeTrash($id)
     {
         $news = News::withTrashed()->find($id)->forceDelete();
-        return redirect('news/trash')->with('status', 'News permanently removed');
+        return redirect()->route('newstrashindex')->with('status', 'News permanently removed');
     }
 }

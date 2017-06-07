@@ -12,7 +12,7 @@
         </div>
 
         <div class="span4">
-        	<a href="{{route('produk', ['id' => 1])}}">
+        	<a href="{{ route('produk', ['id' => 1]) }}">
             	<img class="imgadjustproduct" src="img/bread.png">
             </a>
             <h2>Roti Strogranoff Amigo</h2>
@@ -22,7 +22,7 @@
         </div>
 
         <div class="span4">
-            <a href="{{route('produk', ['id' => 2])}}">
+            <a href="{{ route('produk', ['id' => 2]) }}">
                 <img class="imgadjustproduct" src="img/bread2.png">
             </a>
             <h2>French Toast Baked</h2>
@@ -32,7 +32,7 @@
         </div>
 
         <div class="span4">
-        	<a href="{{route('produk', ['id' => 3])}}">
+        	<a href="{{ route('produk', ['id' => 3]) }}">
             	<img class="imgadjustproduct" src="img/bread3.png">
         	</a>
             <h2>Donat Kentang Ala-Ala</h2>
