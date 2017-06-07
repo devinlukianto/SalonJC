@@ -21,7 +21,7 @@ class ProductController extends Controller
     public function index()
     {
         //
-        $products = Product::paginate(3);
+        $products = Product::paginate(10);
         $brands = Brand::all();
         $categories = Category::all();
         $is_trash = 0;
@@ -73,7 +73,12 @@ class ProductController extends Controller
         } else {
             $product = new Product;
             $product->name = Input::get('name');
-            $product->price = Input::get('price');
+            if(is_numeric(Input::get('price'))) {
+                $product->price = Input::get('price');
+            } else {
+
+            }
+
             $product->stock = Input::get('stock');
             $product->description = Input::get('description');
             $product->brand_id = Input::get('brand_id');
@@ -177,7 +182,7 @@ class ProductController extends Controller
 
     public function trash()
     {
-        $products = Product::onlyTrashed()->paginate(3);
+        $products = Product::onlyTrashed()->paginate(10);
         $brands = Brand::all();
         $categories = Category::all();
         $is_trash = 1;
@@ -202,7 +207,7 @@ class ProductController extends Controller
         $product = Product::withTrashed()->find($id);
         $product->forceDelete();
 
-        return redirect('products/trash');
+        return redirect('productindextrash');
     }
 
     public function showtrash($id)
