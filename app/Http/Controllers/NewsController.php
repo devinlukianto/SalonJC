@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Cache;
 use App\Models\News;
 use App\Models\Comment;
 
@@ -17,7 +18,11 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = News::orderBy('updated_at', 'desc')->paginate(3);
+        $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $news = Cache::remember('newscache-' . $currentPage, 1, function(){
+            return News::orderBy('updated_at', 'desc')->paginate(5);
+        });
+
         $isTrash = 0;
         return view('news.index')
             ->with('news', $news)
