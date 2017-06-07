@@ -13,6 +13,14 @@ use App\Models\Category;
 
 class ProductController extends Controller
 {
+    private $rules = array(
+        'name'=>'required',
+        'price'=>'required|numeric',
+        'stock'=>'required|integer',
+        'description'=>'nullable',
+        'category'=> 'nullable'
+    );    
+
     /**
      * Display a listing of the resource.
      *
@@ -56,15 +64,8 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
-        $rules = array(
-            'name'=>'required',
-            'price'=>'required',
-            'stock'=>'required',
-            'description'=>'required',
-            'category'=> 'required'
-        );
 
-        $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make(Input::all(), $this->rules);
 
         if($validator->fails()) {
             return Redirect::to('products/create')
@@ -138,14 +139,7 @@ class ProductController extends Controller
         //
         $product = Product::find($id);
 
-        $rules = array(
-            'name'=>'required',
-            'price'=>'required',
-            'stock'=>'required',
-            'description'=>'required'
-        );
-
-        $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make(Input::all(), $this->rules);
 
         if($validator->fails()) {
             return Redirect::to('products.create')
