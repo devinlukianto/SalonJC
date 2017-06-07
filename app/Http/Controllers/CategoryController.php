@@ -45,7 +45,7 @@ class CategoryController extends Controller
     {
         //
         $rules = array(
-            'name'       => 'required',
+            'name'       => 'required|unique:categories',
         );
         $validator = Validator::make(Input::all(), $rules);
 
@@ -104,7 +104,7 @@ class CategoryController extends Controller
     {
         //
         $rules = array(
-            'name'       => 'required',
+            'name'       => 'required|unique:categories',
         );
         $validator = Validator::make(Input::all(), $rules);
 

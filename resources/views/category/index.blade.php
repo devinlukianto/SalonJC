@@ -28,8 +28,7 @@
 	        <td color='black' align='center'>{{$category->description}}</td>
 	        <td><a class="btn" href="{{ URL::to('categories/' . $category->id) }}">Show this Category</a></td>
 		    <td><a class="btn" href="{{ URL::to('categories/' . $category->id . '/edit') }}">Edit this Category</a></td>
-	    	<td>{{ Form::open(array('url' => 'categories/' . $category->id)) }}
-	        	{{ Form::hidden('_method', 'DELETE') }}
+	    	<td>{{ Form::open(array('url' => 'categories/' . $category->id, 'method' => 'delete')) }}
 	        	{{ Form::submit('Delete this Category', array('class' => 'btn btn-warning')) }}
 	    		{{ Form::close() }}	
 	    		</td>
@@ -41,7 +40,7 @@
     <div class = 'pagination' align = 'center'>{{ $categories->links() }}</div>
     <br>
 	<a href="{{ URL::to('categories/create') }}" class="btn">Add new Category</a>
-    <a href = "{{URL::to('categories/trash')}}" class="btn">Trash</a>
+    <a href = "{{ route('category.showtrash') }}" class="btn">Trash</a>
 @stop
 
 <hr>

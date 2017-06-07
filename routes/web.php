@@ -56,8 +56,20 @@ Route::resource('news', 'NewsController');
 Route::resource('comment', 'CommentController');
 
 //ROUTE UNTUK KATEGORI
-Route::get('categories/{id}/restore','CategoryController@restore');
-Route::get('categories/restore','CategoryController@restoreAll');
-Route::get('categories/trash','CategoryController@showTrash');
-Route::get('categories/{id}/forcedelete','CategoryController@forceDelete');
+Route::get('categories/{id}/restore', [
+	'uses' => 'CategoryController@restore',
+	'as' => 'category.restore',
+	]);
+Route::get('categories/restore', [
+	'uses' => 'CategoryController@restoreAll',
+	'as' => 'category.restoreall',
+	]);
+Route::get('categories/trash',[
+	'uses' => 'CategoryController@showTrash',
+	'as' => 'category.showtrash',
+	]);
+Route::get('categories/{id}/forcedelete', [
+	'uses' => 'CategoryController@forceDelete',
+	'as' => 'category.forcedelete',
+	]);
 Route::resource('categories','CategoryController');
