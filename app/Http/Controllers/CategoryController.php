@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Pagination\LengthAwarePaginator;
+
+
 
 class CategoryController extends Controller
 {
@@ -16,11 +20,39 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-        $categories = Category::paginate(5);
 
+    /*public function retrieveCategory() {
+            return Category::all();
+        } 
+
+    public function paginateCategory(){
+        return Category::paginate(5);
+    }*/
+
+    public function index(Request $request)
+    {
+        $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        /*if (Cache::has('categories')){
+            $categories = Cache::put('categories' . $currentPage);
+        }
+        else {
+            Cache::put('categories' . $currentPage,  $this->retrieveCategory(), 10);
+        }*/
+
+        $categories_cache = Cache::remember('categories', 10, function(){
+            return Category::all();
+        });
+        
+        $per_page = 5;
+        $categories = new LengthAwarePaginator (
+            $categories_cache->forPage($currentPage, $per_page), 
+            $categories_cache->count(), 
+            $per_page, 
+            $currentPage,
+            ['path' => $request->url(),
+            'query' => $request->query()]
+        );
+        
         return view('category.index', ['categories'=>$categories]);
     }
 
@@ -74,8 +106,13 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
-        $category = Category::find($id);
+        
+        if (Cache::has('categories')) {
+            $category = Category::find($id);
+        }
+        else {
+            $category = Cache::get('categories')->find($id);
+        }
         $products = $category->products()->get();
         return view('category.show', ['category'=>$category, 'products'=>$products]);
     }
@@ -119,6 +156,7 @@ class CategoryController extends Controller
             $category->name       = Input::get('name');
             $category->description       = Input::get('description');
             $category->save();
+            Cache::forget('categories');
 
             // redirect
             Session::flash('message', 'Successfully updated category!');
@@ -137,6 +175,7 @@ class CategoryController extends Controller
         //
         $category = Category::find($id);
         $category->delete();
+        Cache::forget('categories');
 
         // redirect
         Session::flash('message', 'Successfully deleted the category!');
@@ -157,6 +196,12 @@ class CategoryController extends Controller
 
     public function restore($id){
         $categories = Category::onlyTrashed()->find($id)->restore();
+
+        $categories_cache = Cache::remember('categories', 10, function(){
+            return Category::all();
+        });
+        
+        $per_page = 5;
 
         return redirect()->route('categories.index');
     }
