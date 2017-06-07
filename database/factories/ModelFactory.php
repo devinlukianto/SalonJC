@@ -18,3 +18,12 @@ $factory->define(App\Models\Category::class, function (Faker\Generator $faker) {
         'description' => $faker->sentence,
     ];
 });
+
+/*$factory->define(App\Models\Product::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'price' => $faker->randomNumber,
+        'stock' => $faker->randomDigitNotNull,
+        'description' => $faker->sentence,
+    ];
+});*/

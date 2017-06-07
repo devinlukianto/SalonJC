@@ -14,5 +14,11 @@ class CategoriesTableSeeder extends Seeder
     {
         //
         factory(App\Models\Category::class,10)->create();
+
+        /*factory(App\Models\Product::class, 10)->create()->each(function ($u) use ($products) {
+			$products->category()->save(factory(App\Models\Category::class)->make([
+			'category_id' => $u->id
+			]));
+		});*/
     }
 }
