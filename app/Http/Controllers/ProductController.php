@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\Product;
 use App\Models\Brand;
 use App\Models\Category;
@@ -19,17 +21,33 @@ class ProductController extends Controller
         'stock'=>'required|integer',
         'description'=>'nullable',
         'category'=> 'nullable'
-    );    
+    );
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $products = Product::paginate(10);
+        $products_from_cache = Cache::remember('products'/*. $current_page*/, 10, function(){
+            return Product::all();
+        });
+        $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        
+        $per_page = 10;
+        $products = new LengthAwarePaginator (
+            $products_from_cache->forPage($current_page, $per_page), 
+            $products_from_cache->count(), 
+            $per_page, 
+            $current_page,
+            ['path' => $request->url(),
+            'query' => $request->query()]
+        );
+//        $products = Product::paginate(10);
+
+
         $brands = Brand::all();
         $categories = Category::all();
         $is_trash = 0;
@@ -154,9 +172,10 @@ class ProductController extends Controller
             $product->category_id = Input::get('category');
             $product->update();
 
+            Cache::forget('products');
+
             return redirect('products');
         }
-
     }
 
     /**
@@ -170,6 +189,8 @@ class ProductController extends Controller
         //
         $product = Product::find($id);
         $product->delete();
+
+        Cache::forget('products');
 
         return redirect('products');
     }
@@ -192,6 +213,7 @@ class ProductController extends Controller
         $product = Product::onlyTrashed()->find($id);
         $product->restore();
 
+        Cache::forget('products');
         
         return redirect('products');
     }
