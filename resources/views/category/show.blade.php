@@ -20,8 +20,8 @@
     <h2>{{$category->name}}</h2>
     <p>Description : {{$category->description}}</p>
     <br><hr>
-    <a class="btn" href="{{ URL::to('categories') }}">Back to category index</a>
-    <a class="btn" href="{{ URL::to('categories/' . $category->id . '/edit') }}">Edit this Category</a>
+    <a class="btn" href="{{ route('categories.index') }}">Back to category index</a>
+    <a class="btn" href="{{ route('categories.edit', ['id' => $category->id]) }}">Edit this Category</a>
     {{ Form::open(array('url' => 'categories/' . $category->id, 'class' => 'pull-right')) }}
         {{ Form::hidden('_method', 'DELETE') }}
         {{ Form::submit('Delete this Category', array('class' => 'btn btn-warning')) }}
