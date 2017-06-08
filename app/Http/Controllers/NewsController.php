@@ -143,7 +143,7 @@ class NewsController extends Controller
             $news->content  = Input::get('content');
             $news->save();
 
-            Cache::forget('newscache');
+            //Cache::forget('newscache');
 
             return redirect()->route('news.index')->with('status', 'News successfully updated');
         }
@@ -161,7 +161,7 @@ class NewsController extends Controller
         $news = News::find($id);
         $news->delete();
 
-        Cache::forget('newscache');
+        //Cache::forget('newscache');
 
         return redirect()->back()->with('status', 'News successfully deleted');
     }
@@ -180,7 +180,7 @@ class NewsController extends Controller
     {
         $news = News::withTrashed()->find($id)->restore();
 
-        Cache::forget('newscache');
+        //Cache::forget('newscache');
         return redirect()->back()->with('status', 'News successfully restored');
     }
 
