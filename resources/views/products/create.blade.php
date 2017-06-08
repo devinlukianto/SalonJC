@@ -15,6 +15,7 @@
         </div>
     </div>
 
+{{ HTML::ul($errors->all())}}
 
 {{ Form::open(array('url' => 'products')) }}
 

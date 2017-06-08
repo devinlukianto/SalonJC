@@ -11,15 +11,14 @@
 |
 */
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\User::class, function (Faker\Generator $faker) {
-    static $password;
+$factory->define(App\Models\Product::class, function (Faker\Generator $faker) {
 
     return [
         'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
+        'price' => $faker->numberBetween(10000,50000),
+        'stock' => $faker->numberBetween(10,100),
+        'description' => $faker->text,
+        'brand_id' => 1,
+        'category_id' => 1
     ];
 });
-
