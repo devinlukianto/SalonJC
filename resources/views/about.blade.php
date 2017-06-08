@@ -16,7 +16,7 @@
     <!-- /. PAGE TITLE-->
     <div class="row">
         <div class="span6">
-            <img class="pull-left" alt="" src="img/baritontoko.jpg" />
+            <img class="pull-left" alt="" src="{{ asset('img/baritontoko.jpg') }}" />
         </div>
         <div class="span6">
             <p>Toko Roti Bariton merupakan toko roti yang menjual berbagai macam roti dan kue. Produk utama Bariton adalah roti tawar, namun Bariton juga menyediakan banyak variasi roti dan kue yang mengikuti tren dan perkembangan jaman.</p>

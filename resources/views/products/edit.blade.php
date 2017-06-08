@@ -15,6 +15,8 @@
         </div>
     </div>
 
+{{ HTML::ul($errors->all())}}
+
 {{ Form::model($product, array('route' => array('products.update', $product->id), 'method'=>'PUT')) }}
 
 	{{ Form::label('name','Name') }}

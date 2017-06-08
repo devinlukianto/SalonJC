@@ -7,27 +7,55 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\Product;
 use App\Models\Brand;
 use App\Models\Category;
 
 class ProductController extends Controller
 {
+    private $rules = array(
+        'name'=>'required',
+        'price'=>'required|numeric',
+        'stock'=>'required|integer',
+        'description'=>'nullable',
+        'category'=> 'nullable'
+    );
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $products = Product::all();
+        $products_from_cache = Cache::rememberForever('products',  function(){
+            return Product::all();
+        });
+        $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        
+        $per_page = 10;
+        $products = new LengthAwarePaginator (
+            $products_from_cache->forPage($current_page, $per_page), 
+            $products_from_cache->count(), 
+            $per_page, 
+            $current_page,
+            ['path' => $request->url(),
+            'query' => $request->query()]
+        );
+//        $products = Product::paginate(10);
+
+
         $brands = Brand::all();
         $categories = Category::all();
+        $is_trash = 0;
         return view('products.index')
             ->with('products',$products)
             ->with('brands',$brands)
-            ->with('categories',$categories);
+            ->with('categories',$categories)
+            ->with('is_trash',$is_trash);
     }
 
     /**
@@ -54,24 +82,23 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
-        $rules = array(
-            'name'=>'required',
-            'price'=>'required',
-            'stock'=>'required',
-            'description'=>'required',
-            'category'=> 'required'
-        );
 
-        $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make(Input::all(), $this->rules);
 
         if($validator->fails()) {
-            return Redirect::to('products/create')
+            return redirect()
+                ->route('products.create')
                 ->withErrors($validator)
                 ->withInput(Input::except('password'));
         } else {
             $product = new Product;
             $product->name = Input::get('name');
-            $product->price = Input::get('price');
+            if(is_numeric(Input::get('price'))) {
+                $product->price = Input::get('price');
+            } else {
+
+            }
+
             $product->stock = Input::get('stock');
             $product->description = Input::get('description');
             $product->brand_id = Input::get('brand_id');
@@ -131,17 +158,10 @@ class ProductController extends Controller
         //
         $product = Product::find($id);
 
-        $rules = array(
-            'name'=>'required',
-            'price'=>'required',
-            'stock'=>'required',
-            'description'=>'required'
-        );
-
-        $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make(Input::all(), $this->rules);
 
         if($validator->fails()) {
-            return Redirect::to('products.create')
+            return redirect(route('products.create'))
                 ->withErrors($validator)
                 ->withInput(Input::except('password'));
         } else {
@@ -155,7 +175,6 @@ class ProductController extends Controller
 
             return redirect('products');
         }
-
     }
 
     /**
@@ -170,6 +189,52 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->delete();
 
+        //Cache::forget('products');
+
         return redirect('products');
+    }
+
+    public function trash()
+    {
+        $products = Product::onlyTrashed()->paginate(10);
+        $brands = Brand::all();
+        $categories = Category::all();
+        $is_trash = 1;
+        return view('products.index')
+            ->with('products',$products)
+            ->with('brands',$brands)
+            ->with('categories',$categories)
+            ->with('is_trash',$is_trash);
+    }
+
+    public function restore($id)
+    {
+        $product = Product::onlyTrashed()->find($id);
+        $product->restore();
+
+        Cache::forget('products');
+        
+        return redirect('products');
+    }
+
+    public function deletepermanent($id)
+    {
+        $product = Product::withTrashed()->find($id);
+        $product->forceDelete();
+
+        return redirect(route('product.trash'));
+    }
+
+    public function showtrash($id)
+    {
+        $product = Product::onlyTrashed()->find($id);
+        $brand = $product->brand;
+        $category = $product->category;
+        $is_trash = 1;
+        return view('products.show')
+            ->with('product',$product)
+            ->with('brand',$brand)
+            ->with('category',$category)
+            ->with('is_trash',$is_trash);
     }
 }

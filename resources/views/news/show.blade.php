@@ -6,7 +6,7 @@
 
 @section('content')
 	<div align="right">	
-		<a href="{{ URL::to('news') }}">Back to News Page</a>
+		<a href="{{ route('news.index') }}">Back to News Page</a>
 	</div>
 	
     <h1>{{ $news->title }}</h1>

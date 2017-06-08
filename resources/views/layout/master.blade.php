@@ -3,23 +3,24 @@
     <head>
         <meta charset="utf-8">
         <title>Bariton Bakery - @yield('title')</title>
+        <link rel="icon" href="{{ asset('img/bariton.png') }}">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
         
         <!-- Bootstrap -->
-        <link href="{{URL::asset('css/bootstrap.css')}}" rel="stylesheet">
-        <link href="{{URL::asset('css/bootstrap-responsive.css')}}" rel="stylesheet">
-        <link href="{{URL::asset('css/style.css')}}" rel="stylesheet">
+        <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/bootstrap-responsive.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
         <!--Script-->
-        <script src="{{URL::asset('js/jquery.js')}}"></script>
-        <script src="{{URL::asset('js/bootstrap.min.js')}}"></script>  
+        <script src="{{ asset('js/jquery.js') }}"></script>
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script>  
     </head>
 
     <!--STYLE OVERRIDE-->
     <style>
-        div, h1, h2, h3 {
+        div, h1, h2, h3, input {
             font-family: Perpetua, serif;
         }
         
@@ -63,7 +64,7 @@
                 <div class="container">
                     <div class="row centeralign">
                         <!--LOGO-->
-                        <div class="span12"><a class="brand" href="index.html"><img width="20%" src="{{URL::asset('img/bariton.png')}}"/></a></div>
+                        <div class="span12"><a class="brand" href="{{route('homeroute')}}"><img width="20%" src="{{ asset('img/bariton.png') }}"/></a></div>
 
                         <!-- MAIN NAVIGATION --> 
                         <div class="navbaralign">
@@ -78,27 +79,31 @@
                                         @section('navbar')
                                         <div class="nav-collapse collapse navbar-responsive-collapse menufontsize">
                                             <ul class="nav">
-                                                <li class="{{$nav_home or ''}}"><a href="{{route('homeroute')}}">HOME</a></li>
+                                                @if (Auth::check())
+                                                    <li class="{{$nav_home or ''}}"><a href="{{ route('adminhome') }}">HOME</a></li>
+                                                @else
+                                                    <li class="{{$nav_home or ''}}"><a href="{{ route('homeroute') }}">HOME</a></li>
+                                                @endif
                                                 <li><a>|</a></li>
-                                                <li class="{{$nav_news or ''}}"><a href="{{URL::to('news')}}">NEWS</a></li>
+                                                <li class="{{$nav_news or ''}}"><a href="{{ route('news.index') }}">NEWS</a></li>
                                                 <li><a>|</a></li>
-                                                <li class="{{$nav_product or ''}}"><a href="{{route('catalogue')}}">OUR PRODUCT</a></li>
+                                                <li class="{{$nav_product or ''}}"><a href="{{ route('catalogue') }}">OUR PRODUCT</a></li>
                                                 <li><a>|</a></li>
-                                                <li class="{{$nav_about or ''}}"><a href="{{route('aboutus')}}">ABOUT US</a></li>
+                                                <li class="{{$nav_about or ''}}"><a href="{{ route('aboutus') }}">ABOUT US</a></li>
                                                 <li><a>|</a></li>
-                                                <li class="{{$nav_contact or ''}}"><a href="{{route('contact')}}">CONTACT</a></li>
+                                                <li class="{{$nav_contact or ''}}"><a href="{{ route('contact') }}">CONTACT</a></li>
                                                 <li><a>|</a></li>
                                                 <li class="dropdown {{$nav_user or ''}}">
                                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">MEMBER <b class="caret"></b></a>
                                                     @if (Auth::check())
                                                     <ul class="dropdown-menu">
-                                                        <li><a href="{{route('homeroute')}}">My Cart</a></li>
-                                                        <li><a href="{{route('logout')}}">Sign Out</a></li>
+                                                        <li><a href="{{ route('homeroute')}}">My Cart</a></li>
+                                                        <li><a href="{{ route('logout')}}">Sign Out</a></li>
                                                     </ul>
                                                     @else
                                                     <ul class="dropdown-menu">
-                                                        <li><a href="{{route('loginget')}}">Sign In</a></li>
-                                                        <li><a href="{{route('registerget')}}">Register</a></li>
+                                                        <li><a href="{{ route('loginget') }}">Sign In</a></li>
+                                                        <li><a href="{{ route('registerget') }}">Register</a></li>
                                                     </ul>
                                                     @endif
                                                 </li>
