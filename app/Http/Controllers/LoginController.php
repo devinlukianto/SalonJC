@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -15,30 +16,41 @@ class LoginController extends Controller
     }
 
     //LOGIN MODE
-    public function doLogin()
+    public function doLogin(Request $request)
     {
-        $user = new \App\Models\User;
-        $user->email    = Input::get('email');
-        $user->password = Input::get('password');
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
 
-        if (Auth::attempt(['email' => $user->email, 'password' => $user->password])) {
-            // Authentication passed...
-            return redirect('home')->with('status', 'You are logged in');
+        if ($validator->fails()) {
+            return redirect()->route('loginget')
+                ->withErrors($validator)
+                ->withInput();
         } else {
-            return redirect('login')->with('status', 'Please insert correct combination of email and password!');
+            $user = new \App\Models\User;
+            $user->email    = Input::get('email');
+            $user->password = Input::get('password');
+
+            if (Auth::attempt(['email' => $user->email, 'password' => $user->password])) {
+            // Authentication passed...
+                return redirect()->route('adminhome')->with('status', 'You are logged in as administrator');
+            } else {
+                return redirect()->route('loginget')->with('status', 'Please insert a correct combination of id and password');
+            }
         }
     }
 
     //GUEST MODE
     public function doGuest()
     {
-        return redirect('home')->with('status', 'You are now logged in as a guest');
+        return redirect()->route('homeroute')->with('status', 'You are now logged in as a guest');
     }
 
     public function doLogout()
     {
         Auth::logout();
         Session::flush();
-        return redirect('home')->with('status', 'You are logged out');
+        return redirect()->route('homeroute')->with('status', 'You are logged out');
     }
 }

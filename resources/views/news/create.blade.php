@@ -2,26 +2,44 @@
 
 @extends('layout.master')
 
-@section('title', 'Create News (Admin)')
+@if (Auth::check())
 
-@section('content')
-    <h1>Create News</h1>
+    @section('title', 'Create News (Admin)')
 
-    {{ HTML::ul($errors->all()) }}
+    @section('content')
+        <h1>Create News</h1>
 
-    {{ Form::open(array('url' => 'news')) }}
+        {{ HTML::ul($errors->all()) }}
 
-        <div class="form-group">
-            {{ Form::label('title', 'Title') }}
-            {{ Form::text('title', Input::old('title'), array('class' => 'form-control')) }}
+        {{ Form::open(array('url' => 'news')) }}
+
+            <div class="form-group">
+                {{ Form::label('title', 'Title') }}
+                {{ Form::text('title', Input::old('title'), array('class' => 'form-control')) }}
+            </div>
+
+            <div class="form-group">
+                {{ Form::label('content', 'Content') }}
+                {{ Form::textarea('content', Input::old('content'), array('class' => 'form-control')) }}
+            </div>
+
+            {{ Form::submit('Submit', array('class' => 'btn btn-primary')) }}
+
+        {{ Form::close() }}
+        
+    @endsection
+
+@else
+
+    @section('title', 'Redirecting...')
+
+    @section('content')
+        <div class="row feature-box">
+            <div class="span12 cnt-title">
+                <h1>Access Denied</h1>
+                <span>You must log in as admin to see this page</span>
+            </div>
         </div>
+    @endsection
 
-        <div class="form-group">
-            {{ Form::label('content', 'Content') }}
-            {{ Form::textarea('content', Input::old('content'), array('class' => 'form-control')) }}
-        </div>
-
-        {{ Form::submit('Submit', array('class' => 'btn btn-primary')) }}
-
-    {{ Form::close() }}
-@stop
+@endif
