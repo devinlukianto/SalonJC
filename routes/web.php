@@ -52,8 +52,17 @@ Route::post('login', 'LoginController@doLogin')->name('loginpost');
 Route::get('logout', 'LoginController@doLogout')->name('logout');
 Route::get('guestlogin', 'LoginController@doGuest')->name('guestget');
 
+//ROUTE CRUD NEWS DAN COMMENT
+Route::get('news/trash', 'NewsController@getTrash')->name('newstrashindex');
+Route::get('news/{id}/restore', 'NewsController@restoreTrash')->name('newsrestore');
+Route::get('news/{id}/remove', 'NewsController@removeTrash')->name('newsremove');
 Route::resource('news', 'NewsController');
 Route::resource('comment', 'CommentController');
+
+//ROUTE ADMIN
+Route::get('admin/home', function () {
+    return view('admin.index');
+})->name('adminhome');
 
 //ROUTE UNTUK KATEGORI
 Route::resource('categories','CategoryController');

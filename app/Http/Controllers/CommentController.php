@@ -49,7 +49,9 @@ class commentController extends Controller
         $validator = Validator::make(Input::all(), $rules);
 
         if ($validator->fails()) {
-            return redirect('comment/create')
+            return redirect()->route('comment.create')
+                ->withErrors($validator)
+                ->withInput()
                 ->with('status', 'Comment failed to create');
         } else {
             $comment = new Comment;
@@ -57,7 +59,8 @@ class commentController extends Controller
             $comment->content  = Input::get('content');
             $comment->save();
 
-            return redirect('news/'.$comment->news_id)->with('status', 'Comment successfully created');
+            return redirect()->route('news.show', ['id' => $comment->news_id])
+                ->with('status', 'Comment successfully created');
         }
     }
 
@@ -92,7 +95,9 @@ class commentController extends Controller
 
         // process the login
         if ($validator->fails()) {
-            return redirect('comment/' . $id . '/edit')
+            return redirect()->route('comment.edit', ['id' => $id])
+                ->withErrors($validator)
+                ->withInput()
                 ->with('status', 'Comment failed to update');
         } else {
             // store
@@ -100,7 +105,8 @@ class commentController extends Controller
             $comment->content  = Input::get('content');
             $comment->save();
 
-            return redirect('news/'.$comment->news_id)->with('status', 'Comment successfully updated');
+            return redirect()->route('news.show', ['id' => $comment->news_id])
+                ->with('status', 'Comment successfully updated');
         }
     }
 
@@ -115,6 +121,7 @@ class commentController extends Controller
         $comment = Comment::find($id);
         $comment->delete();
 
-        return redirect('news/'.$comment->news_id)->with('status', 'Comment successfully deleted');
+        return redirect()->route('news.show', ['id' => $comment->news_id])
+                ->with('status', 'Comment successfully deleted');
     }
 }

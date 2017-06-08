@@ -20,8 +20,20 @@
         </div>
     </div>
     <!-- /. PAGE TITLE-->
+    
+    @if($errors->any())
+        <div class="alert alert-danger">
+        @foreach($errors->all() as $err)
+            <li><span>{{ $err }}</li>
+        @endforeach
+        </div>
+    @endif
+
     <div class="row">
-		<form class="form-horizontal span12" method="POST" action="{{route('loginpost')}}">
+		<form class="form-horizontal span12" method="POST" action="{{ route('loginpost') }}">
+            <div class="span12">
+                <label class="control-label span5" >SIGN IN AS ADMIN</label>
+            </div>
             <div class="span12">
                 <label class="control-label span5">Email: </label>
                 <div class="span7">
@@ -39,11 +51,11 @@
             </div>
         </form>
         <br><br><br><br><br><br><br>
-        <form class="form-horizontal span12" method="GET" action="{{route('guestget')}}">
+        <form class="form-horizontal span12" method="GET" action="{{ route('guestget') }}">
             <div class="span12">
-                <label class="control-label span5" >or CONTINUE AS GUEST </label>
+                <label class="control-label span5" >SIGN IN AS GUEST</label>
                 <div class="span7">
-                    <p>Continue your order as a guest, you can sign up later for your account</p>
+                    <p>Continue as a guest to order product</p>
                     <input type="submit" class="btn btn-primary" value="GUEST PAGE">
                 </div>
             </div>

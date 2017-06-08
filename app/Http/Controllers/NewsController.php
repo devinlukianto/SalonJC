@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Cache;
 use App\Models\News;
 use App\Models\Comment;
 
@@ -15,12 +17,29 @@ class NewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $news = News::all();
+        //cache
+        $news_cached = Cache::remember('newscache', 1, function(){
+            return News::orderBy('updated_at', 'desc')->get();
+        });
 
+        //paginator
+        $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $per_page = 5;
+        $news = new LengthAwarePaginator (
+            $news_cached->forPage($current_page, $per_page), 
+            $news_cached->count(), 
+            $per_page, 
+            $current_page, [
+            'path' => $request->url(),
+            'query' => $request->query()
+        ]);
+
+        $isTrash = 0;
         return view('news.index')
-            ->with('news', $news);
+            ->with('news', $news)
+            ->with('isTrash', $isTrash);
     }
 
     /**
@@ -49,7 +68,10 @@ class NewsController extends Controller
         $validator = Validator::make(Input::all(), $rules);
 
         if ($validator->fails()) {
-            return redirect('news/create')
+            return redirect()
+                ->route('news.create')
+                ->withErrors($validator)
+                ->withInput()
                 ->with('status', 'News failed to create');
         } else {
             $news = new News;
@@ -57,7 +79,7 @@ class NewsController extends Controller
             $news->content  = Input::get('content');
             $news->save();
 
-            return redirect('news')->with('status', 'News successfully created');
+            return redirect()->route('news.index')->with('status', 'News successfully created');
         }
     }
 
@@ -69,7 +91,7 @@ class NewsController extends Controller
      */
     public function show($id)
     {
-        $news = News::find($id);
+        $news = News::withTrashed()->find($id);
         $comment = $news->comments()->get();
 
         return view('news.show')
@@ -109,7 +131,10 @@ class NewsController extends Controller
 
         // process the login
         if ($validator->fails()) {
-            return redirect('news/' . $id . '/edit')
+            return redirect()
+                ->route('news.edit', ['id' => $id])
+                ->withErrors($validator)
+                ->withInput()
                 ->with('status', 'News failed to update');
         } else {
             // store
@@ -118,7 +143,9 @@ class NewsController extends Controller
             $news->content  = Input::get('content');
             $news->save();
 
-            return redirect('news')->with('status', 'News successfully updated');
+            //Cache::forget('newscache');
+
+            return redirect()->route('news.index')->with('status', 'News successfully updated');
         }
     }
 
@@ -130,9 +157,36 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
+        //Delete overridden with soft delete function
         $news = News::find($id);
         $news->delete();
 
-        return redirect('news')->with('status', 'News successfully deleted');
+        //Cache::forget('newscache');
+
+        return redirect()->back()->with('status', 'News successfully deleted');
+    }
+
+    /*SOFT DELETES FUNCTION*/
+    public function getTrash()
+    {
+        $news = News::onlyTrashed()->orderBy('updated_at', 'desc')->paginate(3);
+        $isTrash = 1;
+        return view('news.index')
+            ->with('news', $news)
+            ->with('isTrash', $isTrash);
+    }
+
+    public function restoreTrash($id)
+    {
+        $news = News::withTrashed()->find($id)->restore();
+
+        //Cache::forget('newscache');
+        return redirect()->back()->with('status', 'News successfully restored');
+    }
+
+    public function removeTrash($id)
+    {
+        $news = News::withTrashed()->find($id)->forceDelete();
+        return redirect()->back()->with('status', 'News permanently removed');
     }
 }
