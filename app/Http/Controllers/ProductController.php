@@ -31,7 +31,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         //
-        $products_from_cache = Cache::remember('products'/*. $current_page*/, 10, function(){
+        $products_from_cache = Cache::rememberForever('products',  function(){
             return Product::all();
         });
         $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
@@ -86,7 +86,8 @@ class ProductController extends Controller
         $validator = Validator::make(Input::all(), $this->rules);
 
         if($validator->fails()) {
-            return Redirect::to('products/create')
+            return redirect()
+                ->route('products.create')
                 ->withErrors($validator)
                 ->withInput(Input::except('password'));
         } else {
@@ -160,7 +161,7 @@ class ProductController extends Controller
         $validator = Validator::make(Input::all(), $this->rules);
 
         if($validator->fails()) {
-            return Redirect::to('products.create')
+            return redirect(route('products.create'))
                 ->withErrors($validator)
                 ->withInput(Input::except('password'));
         } else {
@@ -171,8 +172,6 @@ class ProductController extends Controller
             $product->brand_id = Input::get('brand_id');
             $product->category_id = Input::get('category');
             $product->update();
-
-            Cache::forget('products');
 
             return redirect('products');
         }
@@ -190,7 +189,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->delete();
 
-        Cache::forget('products');
+        //Cache::forget('products');
 
         return redirect('products');
     }
@@ -223,7 +222,7 @@ class ProductController extends Controller
         $product = Product::withTrashed()->find($id);
         $product->forceDelete();
 
-        return redirect('productindextrash');
+        return redirect(route('product.trash'));
     }
 
     public function showtrash($id)

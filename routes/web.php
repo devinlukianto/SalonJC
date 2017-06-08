@@ -38,10 +38,10 @@ Route::get('produk/{id}', 'PageController@fetchproduct')->name('produk');
 //ROUTE UNTUK REGISTER
 
 //ROUTE UNTUK PRODUK YANG SUDAH DIHAPUS (SOFT DELETE)
-Route::delete('products/{id}/delete', 'ProductController@deletepermanent')->name('productdelete');
-Route::get('products/{id}/restore', 'ProductController@restore')->name('productrestore');
-Route::get('products/{id}/showtrash', 'ProductController@showtrash')->name('productshowtrash');
-Route::get('products/trash', 'ProductController@trash')->name('productindextrash');
+Route::delete('products/{id}/delete', ['as'=>'product.trash.delete', 'uses'=>'ProductController@deletepermanent']);
+Route::get('products/{id}/restore', ['as'=>'product.trash.restore', 'uses'=>'ProductController@restore']);
+Route::get('products/{id}/showtrash', ['as'=>'product.trash.show','uses'=>'ProductController@showtrash']);
+Route::get('products/trash', ['as'=>'product.trash','uses'=>'ProductController@trash']);
 //ROUTE UNTUK CRUD PRODUK
 Route::resource('products','ProductController');
 
