@@ -39,9 +39,19 @@ class CategoryController extends Controller
             Cache::put('categories' . $currentPage,  $this->retrieveCategory(), 10);
         }*/
 
-        $categories_cache = Cache::remember('categories', 10, function(){
+        /*if (Cache::has('categoriescache')) {
+             $categories = Cache::pull('categoriescache')-> paginate(5);
+        }
+        else {
+            Cache::rememberForever('categoriescache', function(){
+                return Category::all();
+            });
+        }*/
+        $categories_cache = Cache::rememberForever('categoriescache', function(){
             return Category::all();
         });
+
+        //$categories = Cache::remember('categoriescache')::paginate(5);
         
         $per_page = 5;
         $categories = new LengthAwarePaginator (
@@ -93,7 +103,7 @@ class CategoryController extends Controller
             $category->save();
 
             // redirect
-            Session::flash('message', 'Successfully created nerd!');
+            Session::flash('message', 'Successfully created Category!');
             return redirect()->route('categories.index');
         }
     }
@@ -106,13 +116,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        
-        if (Cache::has('categories')) {
-            $category = Category::find($id);
-        }
-        else {
-            $category = Cache::get('categories')->find($id);
-        }
+        $category = Category::find($id);
         $products = $category->products()->get();
         return view('category.show', ['category'=>$category, 'products'=>$products]);
     }
@@ -156,7 +160,7 @@ class CategoryController extends Controller
             $category->name       = Input::get('name');
             $category->description       = Input::get('description');
             $category->save();
-            Cache::forget('categories');
+            //Cache::forget('categories');
 
             // redirect
             Session::flash('message', 'Successfully updated category!');
@@ -175,7 +179,7 @@ class CategoryController extends Controller
         //
         $category = Category::find($id);
         $category->delete();
-        Cache::forget('categories');
+        //Cache::forget('categories');
 
         // redirect
         Session::flash('message', 'Successfully deleted the category!');
@@ -210,6 +214,5 @@ class CategoryController extends Controller
         $category = Category::onlyTrashed()->find($id)->forceDelete();
         $categories = Category::onlyTrashed()->paginate(5);
 
-        return view('category.trash', ['categories'=>$categories]);
-    }
+       return redirect()->route('category.showtrash');    }
 }

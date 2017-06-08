@@ -72,12 +72,4 @@ Route::get('categories/{id}/forcedelete', [
 	'uses' => 'CategoryController@forceDelete',
 	'as' => 'category.forcedelete',
 	]);
-Route::resource('categories','CategoryController' ,['names' =>	[
-		'index' => 'categories.index',
-		'create' => 'categories.create',
-		'store' => 'categories.store',
-		'show' => 'categories.show',
-		'edit' => 'categories.edit',
-		'update' => 'categories.update',
-		'destory' => 'categories.destroy',
-	]]);
+Route::resource('categories','CategoryController');
